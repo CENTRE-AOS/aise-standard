@@ -1,6 +1,6 @@
 {
-    "version": "1.1.0-beta.1",
-    "description": "AISE Git Governance — 治理能力注册表",
+    "version": "1.1.0-beta.2",
+    "description": "AISE Git Governance — 治理能力注册表（含授权 + 审计）",
     "hooks": {
         "pre_commit": {
             "enabled": true,
@@ -58,5 +58,15 @@
         "description": "Hook 执行时检查项目 AISE/VERSION 与 hook 版本是否一致",
         "strict": true,
         "on_mismatch": "warning"
+    },
+    "exemption": {
+        "enabled": true,
+        "description": "豁免协议 — P0 禁止/P1 用户确认/P2 自动允许",
+        "exemption_file": ".project/decisions/exemptions.md"
+    },
+    "audit": {
+        "enabled": true,
+        "description": "审计追踪 — gate/agent/authorization 三层事件日志",
+        "log_dir": ".project/audit/"
     }
 }

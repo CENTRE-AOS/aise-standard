@@ -1,9 +1,9 @@
 {
-    "aise_version": "1.1.0-beta.1",
+    "aise_version": "1.1.0-beta.2",
     "schema_version": "1",
     "released": "2026-07-14",
     "status": "beta",
-    "description": "AISE v1.1.0 — Git Governance Extension (proposal). Adds native Git gate enforcement (pre-commit, commit-msg, pre-push, post-merge).",
+    "description": "AISE v1.1.0-beta.2 — Authorization Layer + Audit Trail (governance loop closure)",
     "governance": {
         "agent_governance_repo": "lovingxiong-dot/agent-governance",
         "aise_standard_repo": "lovingxiong-dot/aise-standard",
@@ -14,15 +14,21 @@
         "new": [
             "Git-Governance/ 目录（git-gate.md + policies.json + 5 gates）",
             "hooks/ shell wrapper + .ps1 双文件结构（Windows 兼容）",
-            "commands/ 层（aise-fetch/pull/sync 替代直接 git pull）",
+            "commands/ 层（aise-fetch/update/sync/verify）",
             "install-hooks.ps1 独立安装脚本",
             "aise-init.ps1 增加 P8 安装 Git Hooks + P9 AISE Verify",
             "分支感知 archive 检查（main/release vs feature）",
-            "AISE 版本校验（hook vs project version mismatch detection）"
+            "AISE 版本校验（hook vs project version mismatch detection）",
+            "Registry/git-governance.json 治理能力注册表",
+            "Policies/exemption-policy.md 豁免协议（P0/P1/P2 权限等级）",
+            "Policies/audit-policy.md 审计追踪（三层事件日志）",
+            "hooks/aise-audit.psm1 共享审计模块",
+            "所有 Hook 增加审计日志写入 + 豁免检测"
         ],
         "modified": [
             "pre-push 不再强制所有分支必须 tag",
-            "hooks 重构为 shell wrapper + .ps1"
+            "hooks 重构为 shell wrapper + .ps1 + 审计",
+            "aise-pull.ps1 重命名为 aise-update.ps1"
         ],
         "removed": []
     }
