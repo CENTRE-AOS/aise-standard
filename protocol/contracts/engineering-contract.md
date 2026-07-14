@@ -8,6 +8,15 @@
 
 本合约定义 AI 软件工程的基础流程与约束，确保所有 AI 执行统一的工程标准。
 
+AISE 支持两种协作模式：
+
+| 模式 | 说明 | 适用场景 |
+|------|------|---------|
+| **Autonomous Agent Engineering** | AI 自主完成 Architecture → Implementation → Testing → Review → Release 全流程，用户只需提供 Mission | 目标模式 |
+| **AI 辅助开发** | AI 辅助用户完成部分代码修改，用户审核后提交 | 过渡/兼容模式 |
+
+本合约以 Autonomous Mode 为基准定义。
+
 ## 2. 工程生命周期
 
 ```

@@ -8,14 +8,21 @@
 
 本合约定义所有项目必须维护的元数据文件格式，确保 AI 之间可以无缝接续，无需依赖外部上下文。
 
-## 2. 必维护文件
+## 2. 必维护文件（Autonomous Mode）
 
-| 文件 | 维护者 | 说明 |
+| 文件/目录 | 维护者 | 说明 |
+|-----------|--------|------|
+| VERSION | AI Agent | 语义化版本号，纯文本 |
+| CHANGELOG.md | AI Agent | 版本变更记录 |
+| PROJECT_BLUEPRINT.md | AI Agent | 项目蓝图与架构全景 |
+| .project/ | AI Agent | 项目知识库 |
+| .handoff/ | AI Agent | Agent 交接上下文 |
+| .sync/ | AI Agent | 环境同步状态 |
+| HANDOFF.md | AI Agent | 交接上下文 |
+
+| 例外 | 维护者 | 说明 |
 |------|--------|------|
-| VERSION | AI 自动维护 | 语义化版本号，纯文本 |
-| CHANGELOG.md | AI 自动维护 | 版本变更记录 |
-| PROJECT_BLUEPRINT.md | AI 自动维护 | 项目蓝图与架构全景 |
-| HANDOFF.md | AI 自动维护 | 交接上下文 |
+| secrets/.env | 用户 | 密钥和私有凭证 |
 
 ## 3. VERSION 文件格式
 
