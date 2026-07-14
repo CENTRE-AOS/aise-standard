@@ -2,7 +2,7 @@
 
 ## 元信息
 
-| 项目名称 | <project-name> | 当前版本 | v0.1.0 | 存档次数 | 0 |
+| 项目名称 | {project_name} | 当前版本 | v0.1.0 | 存档次数 | 0 |
 
 ## Current Development Authority
 
@@ -13,7 +13,7 @@
 
 ## 项目定位
 
-<一句话描述项目定位。>
+{一句话描述项目定位}
 
 ## 核心原则
 
@@ -21,30 +21,38 @@
 2. **项目知识保存在项目内**：`.project/` 目录是长期知识的唯一来源。
 3. **任何工具都是可替换的执行者**：AI 只是执行者，Git 仓库才是永久资产。
 
+## 技术栈
+
+| 层级 | 技术 |
+|------|------|
+
 ## 目录结构
 
-```text
-<project>/
+```
+{project}/
 ├── src/
 ├── tests/
 ├── docs/
 ├── .project/
-│   ├── architecture/
-│   ├── contracts/
-│   ├── decisions/
-│   ├── prompts/
-│   ├── feedback/
-│   ├── roadmap/
-│   └── standards/
+├── .handoff/
 ├── .sync/
 ├── .backup/
-├── CHANGELOG.md
+├── .gitignore
+├── README.md
 ├── PROJECT_BLUEPRINT.md
-└── README.md
+└── CHANGELOG.md
 ```
 
-## 版本历史
+## 最近变更
 
-| 版本 | 日期 | 说明 |
-|------|------|------|
-| v0.1.0 | YYYY-MM-DD | 项目初始化。 |
+{latest_changes}
+
+## 历史归档
+
+| 版本 | 标签 | 日期 | 摘要 |
+|------|------|------|------|
+
+## Agent 交接记录
+
+| 日期 | Agent | 类型 | 摘要 |
+|------|-------|------|------|

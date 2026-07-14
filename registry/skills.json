@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0.0",
+  "description": "AISE Skill Registry — all registered skills with their trigger words and paths.",
+  "last_updated": "2026-07-14",
+  "skills": {
+    "archive": {
+      "name": "Archive",
+      "version": "2.0",
+      "trigger": ["存档", "存档并push"],
+      "path": "Skills/archive/SKILL.md",
+      "description": "冻结版本，生成 Commit、Tag、CHANGELOG，推送至 GitHub",
+      "lifecycle_stage": "Archive",
+      "dependencies": [],
+      "contracts": ["repository-contract", "metadata-contract"]
+    },
+    "handoff": {
+      "name": "Handoff",
+      "version": "3.1",
+      "trigger": ["移交", "接替"],
+      "path": "Skills/handoff/SKILL.md",
+      "description": "生成交接上下文，确保 AI 之间无缝接续",
+      "lifecycle_stage": "Handoff",
+      "dependencies": [],
+      "contracts": ["handoff-protocol"]
+    },
+    "gitops": {
+      "name": "GitOps",
+      "version": "2.0",
+      "trigger": ["新建项目"],
+      "path": "Skills/gitops/SKILL.md",
+      "description": "初始化项目骨架，建立 Git 仓库",
+      "lifecycle_stage": "GitOps",
+      "dependencies": [],
+      "contracts": ["repository-contract", "metadata-contract"]
+    },
+    "review": {
+      "name": "Review",
+      "version": "1.0",
+      "trigger": ["审查", "review", "检查"],
+      "path": "Skills/review/SKILL.md",
+      "description": "代码、架构、文档一致性检查",
+      "lifecycle_stage": "Review",
+      "dependencies": ["archive"],
+      "contracts": ["engineering-contract", "metadata-contract"]
+    },
+    "publish": {
+      "name": "Publish",
+      "version": "2.0",
+      "trigger": ["发布", "Publish"],
+      "path": "Skills/publish/SKILL.md",
+      "description": "从已归档版本生成可发布产物",
+      "lifecycle_stage": "Publish",
+      "dependencies": ["archive"],
+      "contracts": ["metadata-contract"]
+    },
+    "sync": {
+      "name": "Sync",
+      "version": "2.0",
+      "trigger": ["同步", "更新"],
+      "path": "Skills/sync/SKILL.md",
+      "description": "工作环境安全升级到指定版本",
+      "lifecycle_stage": "Sync",
+      "dependencies": [],
+      "contracts": ["repository-contract"]
+    },
+    "fetch": {
+      "name": "Fetch",
+      "version": "2.0",
+      "trigger": ["拉取最新", "Fetch"],
+      "path": "Skills/fetch/SKILL.md",
+      "description": "从 GitHub 拉取最新版本到本地",
+      "lifecycle_stage": "Fetch",
+      "dependencies": [],
+      "contracts": ["repository-contract"]
+    }
+  }
+}
