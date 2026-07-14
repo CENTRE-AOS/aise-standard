@@ -1,7 +1,7 @@
 # Security Policy
 
-> 版本：v1.1.0-beta.5
-> 状态：Beta
+> 版本：v1.1.0
+> 状态：Frozen
 > 适用范围：所有项目（Repository Generic）
 
 ## 1. 总则

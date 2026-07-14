@@ -1,8 +1,8 @@
 {
     "standard": "AISE",
-    "version": "1.1.0-beta.5",
+    "version": "1.1.0",
     "schema_version": "1",
-    "status": "beta",
+    "status": "frozen",
     "bootstrap_completed": false,
     "contracts_loaded": {
         "engineering-contract": false,
