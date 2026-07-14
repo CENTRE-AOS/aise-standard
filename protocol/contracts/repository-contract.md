@@ -1,7 +1,7 @@
 # Repository Contract
 
-> 版本：v1.1
-> 状态：Frozen
+> 版本：v1.1.0-beta.5
+> 状态：Beta
 > 适用范围：所有项目（Repository Generic）
 
 ## 1. 总则
@@ -34,7 +34,6 @@ GitHub Clone → Development → Testing → Review → Archive → Push origin 
 ```
 
 Cloud Session 删除前必须：
-
 - Commit
 - Push origin（GitHub）
 - 生成 HANDOFF.md
@@ -58,18 +57,26 @@ origin   git@github.com:<org>/<repo>.git (push)
 
 **约束**：origin 必须由用户提供，AI 不自动生成。
 
-## 8. 禁止行为
+## 8. Git Governance 约束
 
-- 禁止修改 `origin` 指向非 GitHub 地址。
-- 禁止使用 `--force`、`--mirror`、`--all` 推送。
-- 禁止删除 main/master 分支。
-- 禁止历史重写（已推送的 commit）。
-- 禁止在 Archive 中自动触发其他 Skill。
+所有 Git 操作受 `Git-Governance/` 层保护：
+- pre-commit：文件边界 + 敏感文件 + CHANGELOG 同步
+- commit-msg：消息格式强制
+- pre-push：Remote / Force Push / Tags / 分支删除 / Archive
+- post-merge：版本 / 依赖 / 代码变更检测
 
-## 9. 变更控制
+使用 `aise fetch` / `aise update` / `aise sync` 替代直接 `git pull`。
 
-本合约进入 Frozen 状态后：
+## 9. 禁止行为
 
-- 允许新增说明。
-- 禁止修改核心约定。
-- 如需修改，必须走架构评审，并更新版本号。
+- 禁止修改 `origin` 指向非 GitHub 地址（P1 可豁免）
+- 禁止使用 `--force`、`--mirror`、`--all` 推送（P1 可豁免）
+- 禁止删除 main/master 分支（P0 不可豁免）
+- 禁止历史重写（已推送的 commit）
+- 禁止在 Archive 中自动触发其他 Skill
+
+## 10. 变更控制
+
+进入 Frozen 后：
+- 允许新增说明
+- 禁止修改核心约定

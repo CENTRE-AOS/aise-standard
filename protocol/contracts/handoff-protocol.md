@@ -1,17 +1,16 @@
 # Handoff Protocol
 
-> 版本：v1.0
-> 状态：Frozen
+> 版本：v1.1.0-beta.5
+> 状态：Beta
 > 适用范围：所有项目（Repository Generic）
 
 ## 1. 总则
 
-Handoff Protocol 定义 AI Agent 之间的交接标准。任何符合本协议的 Agent（Codex、Claude Code、Trae、Workbench Agent 等）均可无缝接续。
+Handoff Protocol 定义 AI Agent 之间的交接标准。任何符合本协议的 Agent（Codex、Claude Code、Trae、Cursor 等）均可无缝接续。
 
 ## 2. 触发条件
 
 以下场景必须生成 HANDOFF.md：
-
 - Cloud Workspace 销毁前
 - 当前任务需要暂停并由另一个 AI 接续
 - 用户明确要求移交
@@ -61,7 +60,11 @@ Handoff Protocol 定义 AI Agent 之间的交接标准。任何符合本协议�
 1. `.handoff/HANDOFF.md` — 交接文档（核心）
 2. `PROJECT_BLUEPRINT.md` — 项目蓝图
 3. `git log --oneline -15` — 最近变更历史
-4. `AISE/Registry/skills.json` — 已注册技能
+4. `.project/audit/` — 治理事件日志
+5. `.project/decisions/` — 架构决策记录
+6. `AISE/Registry/skills.json` — 已注册技能
+7. `.project/mission/` — Mission Boundary
+8. `.agent/` — Agent 身份
 
 ## 7. Decision Log 约束
 
@@ -69,11 +72,11 @@ Handoff Protocol 定义 AI Agent 之间的交接标准。任何符合本协议�
 - 优先查看 Key Files，理解当前改动
 - 如有未提交改动，先确认是否 git stash
 - 如有测试命令，先跑测试确认基线
+- 查看审计日志了解治理事件
 
 ## 8. 增量采集
 
 初次移交后，后续移交必须增量采集：
-
 - 从上一次 HANDOFF 的 generated 时间戳开始
 - 只采集新产生的 Decision Log
 - 保留旧 HANDOFF 的完整历史归档
@@ -81,6 +84,5 @@ Handoff Protocol 定义 AI Agent 之间的交接标准。任何符合本协议�
 ## 9. 变更控制
 
 进入 Frozen 后：
-
-- 允许新增可选字段。
-- 禁止删除必填字段或改变其语义。
+- 允许新增可选字段
+- 禁止删除必填字段或改变其语义

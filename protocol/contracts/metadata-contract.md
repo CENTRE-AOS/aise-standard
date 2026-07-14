@@ -1,7 +1,7 @@
 # Metadata Contract
 
-> 版本：v1.0
-> 状态：Frozen
+> 版本：v1.1.0-beta.5
+> 状态：Beta
 > 适用范围：所有项目（Repository Generic）
 
 ## 1. 总则
@@ -12,13 +12,14 @@
 
 | 文件/目录 | 维护者 | 说明 |
 |-----------|--------|------|
-| VERSION | AI Agent | 语义化版本号，纯文本 |
+| AISE/VERSION | AI Agent | 语义化版本号，纯文本 |
 | CHANGELOG.md | AI Agent | 版本变更记录 |
 | PROJECT_BLUEPRINT.md | AI Agent | 项目蓝图与架构全景 |
-| .project/ | AI Agent | 项目知识库 |
+| .project/ | AI Agent | 项目知识库（decisions/ audit/ mission/） |
 | .handoff/ | AI Agent | Agent 交接上下文 |
 | .sync/ | AI Agent | 环境同步状态 |
-| HANDOFF.md | AI Agent | 交接上下文 |
+| AISE/Git-Governance/ | AI Agent | Git 原生出入口控制 |
+| AISE/Registry/ | AI Agent | 注册表（version/compliance/skills/routing/git-governance） |
 
 | 例外 | 维护者 | 说明 |
 |------|--------|------|
@@ -27,13 +28,13 @@
 ## 3. VERSION 文件格式
 
 ```text
-<MAJOR>.<MINOR>.<PATCH>
+<MAJOR>.<MINOR>.<PATCH>[-<pre-release>]
 ```
 
 示例：
 
 ```text
-1.0.0
+1.1.0-beta.2
 ```
 
 ## 4. CHANGELOG.md 格式
@@ -83,13 +84,18 @@
 | 日期 | Agent | 类型 | 摘要 |
 ```
 
-## 6. HANDOFF.md 格式
+## 6. 审计日志格式
 
-遵循 Handoff Protocol v1（详见 `Contracts/handoff-protocol.md`）。
+`.project/audit/` 目录下的 JSONL 日志：
+
+```json
+{"time":"2026-07-14T09:00:00","gate":"pre-commit","agent":"deepseek","branch":"main","result":"pass","duration_ms":120}
+```
+
+详见 `Policies/audit-policy.md`
 
 ## 7. 变更控制
 
 进入 Frozen 后：
-
-- 允许新增可选字段。
-- 禁止删除必填字段或改变其语义。
+- 允许新增可选字段
+- 禁止删除必填字段或改变其语义

@@ -1,7 +1,7 @@
 # Engineering Contract
 
-> 版本：v1.0
-> 状态：Frozen
+> 版本：v1.1.0-beta.5
+> 状态：Beta
 > 适用范围：所有项目（Repository Generic）
 
 ## 1. 总则
@@ -29,7 +29,7 @@ GitOps → Architecture → Implementation → Testing → Review → Archive �
 
 | 阶段 | 负责 Skill | 关键产出 |
 |------|-----------|---------|
-| GitOps | gitops | 项目骨架、目录结构、初始文档 |
+| GitOps | gitops | 项目骨架、目录结构、AISE 注入 |
 | Architecture | 用户 | 架构设计文档 |
 | Implementation | 用户+AI | 代码实现 |
 | Testing | 用户+AI | 测试通过 |
@@ -50,15 +50,21 @@ GitOps → Architecture → Implementation → Testing → Review → Archive �
 - 测试覆盖可接受
 - Review Report 无 Critical 问题
 
-## 5. 安全约束
+## 5. 治理约束
 
 - 遵循 `Policies/security-policy.md`
 - 遵循 `Policies/git-policy.md`
 - 遵循 `Policies/rollback-policy.md`
+- 遵循 `Policies/exemption-policy.md`（P0/P1/P2 豁免）
+- 遵循 `Policies/audit-policy.md`（审计追踪）
+- 遵循 `Git-Governance/`（Git 出入口控制）
+- 遵循 `Policies/mission-boundary.md` — Mission Boundary 合约
+- 遵循 `Policies/adr-policy.md` — ADR 架构决策记录
+- 遵循 `Policies/agent-identity.md` — Agent 身份与能力声明
+- 遵循 `Policies/upgrade-policy.md` — 版本升级协议
 
 ## 6. 变更控制
 
 进入 Frozen 后：
-
-- 允许新增阶段。
-- 禁止调整已有阶段顺序。
+- 允许新增阶段
+- 禁止调整已有阶段顺序

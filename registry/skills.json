@@ -1,77 +1,70 @@
 {
-  "schema_version": "1.0.0",
-  "description": "AISE Skill Registry — all registered skills with their trigger words and paths.",
-  "last_updated": "2026-07-14",
-  "skills": {
-    "archive": {
-      "name": "Archive",
-      "version": "2.0",
-      "trigger": ["存档", "存档并push"],
-      "path": "Skills/archive/SKILL.md",
-      "description": "冻结版本，生成 Commit、Tag、CHANGELOG，推送至 GitHub",
-      "lifecycle_stage": "Archive",
-      "dependencies": [],
-      "contracts": ["repository-contract", "metadata-contract"]
-    },
-    "handoff": {
-      "name": "Handoff",
-      "version": "3.1",
-      "trigger": ["移交", "接替"],
-      "path": "Skills/handoff/SKILL.md",
-      "description": "生成交接上下文，确保 AI 之间无缝接续",
-      "lifecycle_stage": "Handoff",
-      "dependencies": [],
-      "contracts": ["handoff-protocol"]
-    },
-    "gitops": {
-      "name": "GitOps",
-      "version": "2.0",
-      "trigger": ["新建项目"],
-      "path": "Skills/gitops/SKILL.md",
-      "description": "初始化项目骨架，建立 Git 仓库",
-      "lifecycle_stage": "GitOps",
-      "dependencies": [],
-      "contracts": ["repository-contract", "metadata-contract"]
-    },
-    "review": {
-      "name": "Review",
-      "version": "1.0",
-      "trigger": ["审查", "review", "检查"],
-      "path": "Skills/review/SKILL.md",
-      "description": "代码、架构、文档一致性检查",
-      "lifecycle_stage": "Review",
-      "dependencies": ["archive"],
-      "contracts": ["engineering-contract", "metadata-contract"]
-    },
-    "publish": {
-      "name": "Publish",
-      "version": "2.0",
-      "trigger": ["发布", "Publish"],
-      "path": "Skills/publish/SKILL.md",
-      "description": "从已归档版本生成可发布产物",
-      "lifecycle_stage": "Publish",
-      "dependencies": ["archive"],
-      "contracts": ["metadata-contract"]
-    },
-    "sync": {
-      "name": "Sync",
-      "version": "2.0",
-      "trigger": ["同步", "更新"],
-      "path": "Skills/sync/SKILL.md",
-      "description": "工作环境安全升级到指定版本",
-      "lifecycle_stage": "Sync",
-      "dependencies": [],
-      "contracts": ["repository-contract"]
-    },
-    "fetch": {
-      "name": "Fetch",
-      "version": "2.0",
-      "trigger": ["拉取最新", "Fetch"],
-      "path": "Skills/fetch/SKILL.md",
-      "description": "从 GitHub 拉取最新版本到本地",
-      "lifecycle_stage": "Fetch",
-      "dependencies": [],
-      "contracts": ["repository-contract"]
+    "aise_version": "1.1.0-beta.5",
+    "schema_version": "1",
+    "skills": {
+        "archive": {
+            "name": "Archive",
+            "trigger": ["存档", "存档并push"],
+            "description": "Git 存档工作流：变更分析→蓝图/日志更新→打标签→提交",
+            "location": "Skills/archive/SKILL.md",
+            "status": "frozen",
+            "version": "1.0.0"
+        },
+        "handoff": {
+            "name": "Handoff",
+            "trigger": ["移交", "接替"],
+            "description": "Agent 交接工作流：移交生成 HANDOFF.md；接替分析交接文档",
+            "location": "Skills/handoff/SKILL.md",
+            "status": "frozen",
+            "version": "1.0.0"
+        },
+        "gitops": {
+            "name": "GitOps",
+            "trigger": ["新建项目"],
+            "description": "Git 初始化 + 项目骨架生成 + AISE 注入 + Git Hooks 安装",
+            "location": "Skills/gitops/SKILL.md",
+            "status": "beta",
+            "version": "1.1.0"
+        },
+        "review": {
+            "name": "Review",
+            "trigger": ["审查", "review", "检查"],
+            "description": "代码/架构/文档一致性检查，生成 Review Report",
+            "location": "Skills/review/SKILL.md",
+            "status": "frozen",
+            "version": "1.0.0"
+        },
+        "publish": {
+            "name": "Publish",
+            "trigger": ["发布", "Publish"],
+            "description": "构建产物 → 验证 → 生成 Release Notes → 更新 Manifest",
+            "location": "Skills/publish/SKILL.md",
+            "status": "frozen",
+            "version": "1.0.0"
+        },
+        "sync": {
+            "name": "Sync",
+            "trigger": ["同步", "更新"],
+            "description": "工作环境安全升级到指定版本，保留用户数据和配置",
+            "location": "Skills/sync/SKILL.md",
+            "status": "frozen",
+            "version": "1.0.0"
+        },
+        "fetch": {
+            "name": "Fetch",
+            "trigger": ["拉取最新", "Fetch"],
+            "description": "从 GitHub 拉取最新版本，比较差异，可选合并",
+            "location": "Skills/fetch/SKILL.md",
+            "status": "frozen",
+            "version": "1.0.0"
+        },
+        "verify": {
+            "name": "verify",
+            "display": "AISE 合规验证",
+            "triggers": ["验证", "verify", "检查合规"],
+            "version": "1.1.0",
+            "status": "beta",
+            "description": "V0-V7 合规检查：验证 AISE 系统完整性"
+        }
     }
-  }
 }

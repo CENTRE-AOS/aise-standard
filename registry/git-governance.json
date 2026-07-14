@@ -1,5 +1,5 @@
 {
-    "version": "1.1.0-beta.2",
+    "version": "1.1.0-beta.5",
     "description": "AISE Git Governance — 治理能力注册表（含授权 + 审计）",
     "hooks": {
         "pre_commit": {
@@ -68,5 +68,27 @@
         "enabled": true,
         "description": "审计追踪 — gate/agent/authorization 三层事件日志",
         "log_dir": ".project/audit/"
+    },
+    "policies": {
+        "mission-boundary": {
+            "enabled": true,
+            "description": "Mission Boundary Contract — 定义 Agent 可修改文件边界",
+            "policy_file": "Policies/mission-boundary.md"
+        },
+        "adr-policy": {
+            "enabled": true,
+            "description": "ADR 架构决策记录 — 强制记录重大架构决策",
+            "policy_file": "Policies/adr-policy.md"
+        },
+        "agent-identity": {
+            "enabled": true,
+            "description": "Agent 身份与能力声明 — 声明 Agent 模型和权限",
+            "policy_file": "Policies/agent-identity.md"
+        },
+        "upgrade-policy": {
+            "enabled": true,
+            "description": "版本升级协议 — 定义 AISE 版本升级流程",
+            "policy_file": "Policies/upgrade-policy.md"
+        }
     }
 }

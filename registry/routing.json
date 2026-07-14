@@ -1,47 +1,52 @@
 {
-  "schema_version": "1.0.0",
-  "description": "AISE Trigger Routing Table — maps user input to skills.",
-  "last_updated": "2026-07-14",
-  "routing": {
-    "archive": {
-      "triggers": ["存档", "存档并push", "archive"],
-      "skill": "archive",
-      "priority": "high"
-    },
-    "handoff": {
-      "triggers": ["移交", "接替", "handoff", "resume"],
-      "skill": "handoff",
-      "priority": "high"
-    },
-    "gitops": {
-      "triggers": ["新建项目", "gitops", "init"],
-      "skill": "gitops",
-      "priority": "high"
-    },
-    "review": {
-      "triggers": ["审查", "review", "检查", "代码审查", "audit"],
-      "skill": "review",
-      "priority": "medium"
-    },
-    "publish": {
-      "triggers": ["发布", "publish", "release"],
-      "skill": "publish",
-      "priority": "medium"
-    },
-    "sync": {
-      "triggers": ["同步", "更新", "sync", "upgrade"],
-      "skill": "sync",
-      "priority": "medium"
-    },
-    "fetch": {
-      "triggers": ["拉取最新", "fetch", "pull", "拉取"],
-      "skill": "fetch",
-      "priority": "low"
+    "aise_version": "1.1.0-beta.5",
+    "schema_version": "1",
+    "routes": {
+        "archive": {
+            "trigger": ["存档", "存档并push"],
+            "skill": "archive",
+            "description": "存档并推送"
+        },
+        "handoff": {
+            "trigger": ["移交", "接替"],
+            "skill": "handoff",
+            "description": "Agent 交接"
+        },
+        "gitops": {
+            "trigger": ["新建项目"],
+            "skill": "gitops",
+            "description": "新建项目初始化"
+        },
+        "review": {
+            "trigger": ["审查", "review", "检查"],
+            "skill": "review",
+            "description": "代码审查"
+        },
+        "publish": {
+            "trigger": ["发布", "Publish"],
+            "skill": "publish",
+            "description": "发布版本"
+        },
+        "sync": {
+            "trigger": ["同步", "更新"],
+            "skill": "sync",
+            "description": "同步环境"
+        },
+        "fetch": {
+            "trigger": ["拉取最新", "Fetch"],
+            "skill": "fetch",
+            "description": "拉取最新版本"
+        },
+        "git-gate": {
+            "trigger": ["aise fetch", "aise update", "aise sync", "aise verify"],
+            "skill": "git-gate",
+            "description": "Git 安全操作（使用 AISE commands 替代直接 git pull）"
+        },
+        "verify": {
+            "route": "verify",
+            "triggers": ["验证", "verify", "检查合规"],
+            "skill": "verify",
+            "description": "AISE 合规验证"
+        }
     }
-  },
-  "resolution_rules": {
-    "exact_match_first": "精确匹配优先于模糊匹配",
-    "longest_match_wins": "最长匹配的触发词优先",
-    "ambiguous": "有歧义时，列出所有匹配项等待用户选择"
-  }
 }

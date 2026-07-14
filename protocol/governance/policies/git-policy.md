@@ -1,7 +1,7 @@
 # Git Policy
 
-> 版本：v1.1
-> 状态：Frozen
+> 版本：v1.1.0-beta.5
+> 状态：Beta
 > 适用范围：所有项目（Repository Generic）
 
 ## 1. 总则

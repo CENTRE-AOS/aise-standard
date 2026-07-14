@@ -1,8 +1,8 @@
 {
     "standard": "AISE",
-    "version": "1.0.0",
+    "version": "1.1.0-beta.5",
     "schema_version": "1",
-    "status": "bootstrapping",
+    "status": "beta",
     "bootstrap_completed": false,
     "contracts_loaded": {
         "engineering-contract": false,
@@ -22,8 +22,33 @@
     "policies_loaded": {
         "security-policy": false,
         "git-policy": false,
-        "rollback-policy": false
+        "rollback-policy": false,
+        "exemption-policy": false,
+        "audit-policy": false,
+        "mission-boundary": false,
+        "adr-policy": false,
+        "agent-identity": false,
+        "upgrade-policy": false
     },
+    "required_policies": [
+        "security-policy",
+        "git-policy",
+        "rollback-policy",
+        "exemption-policy",
+        "audit-policy",
+        "mission-boundary",
+        "adr-policy",
+        "agent-identity",
+        "upgrade-policy"
+    ],
+    "required_directories": [
+        ".project/mission/",
+        ".project/decisions/",
+        ".agent/"
+    ],
+    "git_governance_loaded": false,
+    "exemption_enabled": false,
+    "audit_enabled": false,
     "started_at": "",
     "completed_at": "",
     "agent_model": "",

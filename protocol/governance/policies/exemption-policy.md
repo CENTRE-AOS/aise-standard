@@ -1,6 +1,6 @@
 # AISE Exemption Protocol
 
-> 版本：v1.1.0-beta.2
+> 版本：v1.1.0-beta.5
 > 状态：Beta
 > 适用范围：所有项目
 
