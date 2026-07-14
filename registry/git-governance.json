@@ -1,5 +1,5 @@
 {
-    "version": "1.1.0",
+    "version": "1.1.0-rc.1",
     "description": "AISE Git Governance — 治理能力注册表（含授权 + 审计）",
     "hooks": {
         "pre_commit": {
@@ -89,6 +89,11 @@
             "enabled": true,
             "description": "版本升级协议 — 定义 AISE 版本升级流程",
             "policy_file": "Policies/upgrade-policy.md"
+        },
+        "memory-ownership": {
+            "enabled": true,
+            "description": "Memory Ownership — 项目记忆所有权与持久化协议",
+            "policy_file": "Policies/memory-ownership.md"
         }
     }
 }

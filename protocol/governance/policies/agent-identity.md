@@ -1,6 +1,6 @@
 # Agent Identity & Capability Policy
 
-> 版本：v1.1.0
+> 版本：v1.1.0-rc.1
 > 状态：Frozen
 > 适用范围：所有项目
 
@@ -34,6 +34,26 @@ Project
   ├── Agent B (Claude)    → identity.json { agent: "claude", ... }
   └── Agent C (Trae)      → identity.json { agent: "trae", ... }
 ```
+
+### .agent/ 目录结构限制
+
+`.agent/` 目录仅允许以下文件：
+
+| 文件 | 用途 |
+|------|------|
+| `identity.json` | Agent 身份标识 |
+| `capability.json` | 能力声明 |
+| `session.json` | 会话状态 |
+
+禁止在 `.agent/` 中创建任何知识存储：
+
+- 禁止 `.agent/memory.md`
+- 禁止 `.agent/notes.md`
+- 禁止 `.agent/decisions/`
+- 禁止 `.agent/knowledge/`
+- 禁止任何其他非上述三文件的持久化存储
+
+Memory 所有权规则详见 `Policies/memory-ownership.md`。
 
 所有审计日志自动关联 Agent Identity。
 
@@ -129,3 +149,54 @@ Agent Identity 变化记录在 `.project/audit/agent-events.jsonl`：
 
 - 最低能力要求由 AISE 版本定义
 - Agent Identity 不可伪造
+
+## 7. Agent 私有目录限制
+
+Agent 不得创建以下目录作为长期知识存储：
+
+| 禁止目录 | 所属 Agent | 原因 |
+|----------|-----------|------|
+| `.trae/` | Trae | 知识归属项目，不属于 Agent |
+| `.claude/` | Claude | 知识归属项目，不属于 Agent |
+| `.workbuddy/` | WorkBuddy | 知识归属项目，不属于 Agent |
+| `.cursor/` | Cursor | 知识归属项目，不属于 Agent |
+| `.codex/` | OpenAI Codex | 知识归属项目，不属于 Agent |
+| `.gemini/` | Gemini | 知识归属项目，不属于 Agent |
+
+所有知识必须写入统一格式：`.project/memory/`。
+
+Memory 所有权规则详见 `Policies/memory-ownership.md`。
+
+## 8. Memory 所有权
+
+### 核心原则
+
+Project Memory 属于项目，不属于任何 Agent。
+
+### 统一入口
+
+所有 Agent 读写 Memory 的统一入口：
+
+```
+.project/memory/
+```
+
+### 生命周期
+
+```
+Agent 进入项目
+    ↓
+自动加载 Memory Index (.project/memory/index.md)
+    ↓
+Agent 执行任务（按需读取/写入 Memory）
+    ↓
+Agent 退出项目
+    ↓
+自动更新 Memory Index
+```
+
+### 约束
+
+- 任何 Agent 不得拥有独立的 Memory 存储
+- 所有 Agent 共享同一套 `.project/memory/` 知识库
+- Memory 格式和结构由项目统一定义，不与特定 Agent 绑定

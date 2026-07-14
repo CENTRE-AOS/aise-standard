@@ -1,9 +1,9 @@
 {
-    "aise_version": "1.1.0",
+    "aise_version": "1.1.0-rc.1",
     "schema_version": "1",
     "released": "2026-07-14",
-    "status": "frozen",
-    "description": "AISE v1.1.0 — Full Governance Kernel: Mission Boundary, ADR, Agent Identity, Capability Discovery, Upgrade Protocol, Compliance Test",
+    "status": "rc",
+    "description": "AISE v1.1.0-rc.1 — Unified Project Memory Architecture",
     "governance": {
         "agent_governance_repo": "lovingxiong-dot/agent-governance",
         "aise_standard_repo": "lovingxiong-dot/aise-standard",

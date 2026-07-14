@@ -1,6 +1,6 @@
 {
     "standard": "AISE",
-    "version": "1.1.0",
+    "version": "1.1.0-rc.1",
     "schema_version": "1",
     "status": "frozen",
     "bootstrap_completed": false,
@@ -28,7 +28,8 @@
         "mission-boundary": false,
         "adr-policy": false,
         "agent-identity": false,
-        "upgrade-policy": false
+        "upgrade-policy": false,
+        "memory-ownership": false
     },
     "required_policies": [
         "security-policy",
@@ -39,7 +40,8 @@
         "mission-boundary",
         "adr-policy",
         "agent-identity",
-        "upgrade-policy"
+        "upgrade-policy",
+        "memory-ownership"
     ],
     "required_directories": [
         ".project/mission/",
