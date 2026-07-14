@@ -1,0 +1,62 @@
+{
+    "version": "1.1.0-beta.1",
+    "description": "AISE Git Governance — 治理能力注册表",
+    "hooks": {
+        "pre_commit": {
+            "enabled": true,
+            "description": "Commit Gate — 文件边界 + 敏感文件 + CHANGELOG 同步",
+            "checks": ["file_boundary", "sensitive_files", "changelog_sync"]
+        },
+        "commit_msg": {
+            "enabled": true,
+            "description": "Commit Message Gate — 格式强制 type(scope): summary",
+            "format": "<type>(<scope>): <summary> [test:<pass>/<total>] [hint:<keyword>] (by AI-<model>)"
+        },
+        "pre_push": {
+            "enabled": true,
+            "description": "Push Gate — Remote/ForcePush/Tags/分支删除/Archive",
+            "checks": ["remote_check", "block_force_push", "block_tags", "block_branch_delete", "archive_status"],
+            "archive_check_branches": {
+                "main": "warning",
+                "master": "warning",
+                "release/*": "warning",
+                "feature/*": "skip",
+                "feat/*": "skip",
+                "fix/*": "skip"
+            }
+        },
+        "post_merge": {
+            "enabled": true,
+            "description": "Merge Gate — 版本/依赖/代码变更检测",
+            "checks": ["aise_version", "dependencies", "code_changes"]
+        }
+    },
+    "commands": {
+        "fetch": {
+            "enabled": true,
+            "description": "安全 git fetch 替代 — 脏工作区警告但允许",
+            "script": "commands/aise-fetch.ps1"
+        },
+        "update": {
+            "enabled": true,
+            "description": "安全 git pull 替代 — 脏工作区阻止",
+            "script": "commands/aise-update.ps1"
+        },
+        "sync": {
+            "enabled": true,
+            "description": "完整 Sync Protocol Y0-Y7 — 含备份和验收",
+            "script": "commands/aise-sync.ps1"
+        },
+        "verify": {
+            "enabled": true,
+            "description": "AISE 完整性校验 — 版本/目录/Hooks/入口/Registry",
+            "script": "commands/aise-verify.ps1"
+        }
+    },
+    "version_check": {
+        "enabled": true,
+        "description": "Hook 执行时检查项目 AISE/VERSION 与 hook 版本是否一致",
+        "strict": true,
+        "on_mismatch": "warning"
+    }
+}

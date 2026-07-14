@@ -1,0 +1,31 @@
+{
+    "standard": "AISE",
+    "version": "1.0.0",
+    "schema_version": "1",
+    "status": "bootstrapping",
+    "bootstrap_completed": false,
+    "contracts_loaded": {
+        "engineering-contract": false,
+        "metadata-contract": false,
+        "repository-contract": false,
+        "handoff-protocol": false
+    },
+    "skills_loaded": {
+        "archive": false,
+        "handoff": false,
+        "gitops": false,
+        "review": false,
+        "publish": false,
+        "sync": false,
+        "fetch": false
+    },
+    "policies_loaded": {
+        "security-policy": false,
+        "git-policy": false,
+        "rollback-policy": false
+    },
+    "started_at": "",
+    "completed_at": "",
+    "agent_model": "",
+    "project_path": ""
+}
