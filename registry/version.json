@@ -1,42 +1,42 @@
 {
-    "aise_version": "1.1.0-rc.1",
-    "schema_version": "1",
-    "released": "2026-07-14",
-    "status": "rc",
-    "description": "AISE v1.1.0-rc.1 — Unified Project Memory Architecture",
-    "governance": {
-        "agent_governance_repo": "lovingxiong-dot/agent-governance",
-        "aise_standard_repo": "lovingxiong-dot/aise-standard",
-        "aise_init_script": "agent-governance/scripts/aise-init.ps1",
-        "install_hooks_script": "agent-governance/scripts/install-hooks.ps1"
-    },
-    "changes_from_v1.0.0": {
-        "new": [
-            "Git-Governance/ 目录（git-gate.md + policies.json + 5 gates）",
-            "hooks/ shell wrapper + .ps1 双文件结构（Windows 兼容）",
-            "commands/ 层（aise-fetch/update/sync/verify）",
-            "install-hooks.ps1 独立安装脚本",
-            "aise-init.ps1 增加 P8 安装 Git Hooks + P9 AISE Verify",
-            "分支感知 archive 检查（main/release vs feature）",
-            "AISE 版本校验（hook vs project version mismatch detection）",
-            "Registry/git-governance.json 治理能力注册表",
-            "Policies/exemption-policy.md 豁免协议（P0/P1/P2 权限等级）",
-            "Policies/audit-policy.md 审计追踪（三层事件日志）",
-            "hooks/aise-audit.psm1 共享审计模块",
-            "所有 Hook 增加审计日志写入 + 豁免检测",
-            "Policies/mission-boundary.md — Mission Boundary Contract",
-            "Policies/adr-policy.md — ADR 架构决策记录",
-            "Policies/agent-identity.md — Agent 身份与能力声明",
-            "Policies/upgrade-policy.md — 版本升级协议",
-            ".project/mission/ 目录（scope.json + constraints.json）",
-            ".project/decisions/ 目录（ADR 决策记录）",
-            ".agent/ 目录（identity.json + capability.json）"
-        ],
-        "modified": [
-            "pre-push 不再强制所有分支必须 tag",
-            "hooks 重构为 shell wrapper + .ps1 + 审计",
-            "aise-pull.ps1 重命名为 aise-update.ps1"
-        ],
-        "removed": []
-    }
+  "aise_version": "1.1.0-rc.2",
+  "schema_version": "1",
+  "released": "2026-07-14",
+  "status": "rc",
+  "description": "AISE v1.1.0-rc.1 — Unified Project Memory Architecture",
+  "governance": {
+    "agent_governance_repo": "lovingxiong-dot/agent-governance",
+    "aise_standard_repo": "lovingxiong-dot/aise-standard",
+    "aise_init_script": "agent-governance/scripts/aise-init.ps1",
+    "install_hooks_script": "agent-governance/scripts/install-hooks.ps1"
+  },
+  "changes_from_v1.0.0": {
+    "new": [
+      "Git-Governance/ 目录（git-gate.md + policies.json + 5 gates）",
+      "hooks/ shell wrapper + .ps1 双文件结构（Windows 兼容）",
+      "commands/ 层（aise-fetch/update/sync/verify）",
+      "install-hooks.ps1 独立安装脚本",
+      "aise-init.ps1 增加 P8 安装 Git Hooks + P9 AISE Verify",
+      "分支感知 archive 检查（main/release vs feature）",
+      "AISE 版本校验（hook vs project version mismatch detection）",
+      "Registry/git-governance.json 治理能力注册表",
+      "Policies/exemption-policy.md 豁免协议（P0/P1/P2 权限等级）",
+      "Policies/audit-policy.md 审计追踪（三层事件日志）",
+      "hooks/aise-audit.psm1 共享审计模块",
+      "所有 Hook 增加审计日志写入 + 豁免检测",
+      "Policies/mission-boundary.md — Mission Boundary Contract",
+      "Policies/adr-policy.md — ADR 架构决策记录",
+      "Policies/agent-identity.md — Agent 身份与能力声明",
+      "Policies/upgrade-policy.md — 版本升级协议",
+      ".project/mission/ 目录（scope.json + constraints.json）",
+      ".project/decisions/ 目录（ADR 决策记录）",
+      ".agent/ 目录（identity.json + capability.json）"
+    ],
+    "modified": [
+      "pre-push 不再强制所有分支必须 tag",
+      "hooks 重构为 shell wrapper + .ps1 + 审计",
+      "aise-pull.ps1 重命名为 aise-update.ps1"
+    ],
+    "removed": []
+  }
 }
