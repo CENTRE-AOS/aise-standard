@@ -57,7 +57,7 @@
 
 **定位**: «Governance Runtime»
 
-**职责**: 把 AISE Standard 应用于项目。
+**职责**: 把 AISE Protocol 应用于项目。
 
 - Bootstrap（入口门）
 - Install / Init（注入标准）
@@ -82,7 +82,7 @@ Agent
   ↓
 Agent Governance  ← Runtime：连接 Agent 与 Standard
   ↓
-AISE Standard     ← Frozen：定义规则
+AISE Protocol     ← Frozen：定义规则
   ↓
 Project Repository ← 受治理项目
 ```
@@ -423,7 +423,7 @@ refactor/*
 
 ## 八、未来产品方向（仅设计目标，当前不实现）
 
-最终形成两种部署方式，但基于同一套 AISE Standard + Governance Runtime：
+最终形成两种部署方式，但基于同一套 AISE Protocol + Governance Runtime：
 
 ### 8.1 Standalone Runtime（单 Agent）
 

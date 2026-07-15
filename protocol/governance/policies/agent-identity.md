@@ -1,6 +1,6 @@
 # Agent Identity & Capability Policy
 
-> 版本：v1.1.0-rc.1
+> 版本：v2.0.0
 > 状态：Frozen
 > 适用范围：所有项目
 
