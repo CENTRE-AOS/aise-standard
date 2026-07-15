@@ -465,7 +465,7 @@ Runtime Ready
       "default_branch": "main",
       "protected_branches": ["main"],
       "development_branch": "main",
-      "description": "AI Software Engineering Standard",
+      "description": "Agent Software Engineering Protocol",
       "tags": ["standard"],
       "branch_strategy": { ... },
       "governance_entry": ".agent-entry.json"
@@ -614,7 +614,7 @@ Step 14: Compliance Check & Ready
 
 ---
 
-## 7. AISE Standard Distribution Model
+## 7. AISE Protocol Distribution Model
 
 > 参见 **ADR-004: AISE Distribution Strategy**。
 
@@ -1218,7 +1218,7 @@ AISE
 AISE 从“系统”下降为“协议层”：
 
 ```text
-AISE Standard
+AISE Protocol
       |
       ↓
 Governance Protocol（治理协议）
@@ -1491,7 +1491,7 @@ Dockerfile    → Docker
 
 #### Related
 
-- Section 7: AISE Standard Distribution Model
+- Section 7: AISE Protocol Distribution Model
 - ADR-001: AISE Protocol Layer Separation
 - ADR-003: AOS / Workbench / Gateway Layer Separation
 

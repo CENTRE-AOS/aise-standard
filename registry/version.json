@@ -1,9 +1,9 @@
 {
-  "aise_version": "1.1.0-rc.2",
+  "aise_version": "2.0.0",
   "schema_version": "1",
   "released": "2026-07-14",
   "status": "rc",
-  "description": "AISE v1.1.0-rc.1 — Unified Project Memory Architecture",
+  "description": "AISE v2.0.0 — Unified Project Memory Architecture",
   "governance": {
     "agent_governance_repo": "lovingxiong-dot/agent-governance",
     "aise_standard_repo": "lovingxiong-dot/aise-standard",
