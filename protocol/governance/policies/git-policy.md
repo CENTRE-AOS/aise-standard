@@ -1,6 +1,6 @@
 # Git Policy
 
-> 版本：v2.0.0
+> 版本：v2.0.2
 > 状态：Frozen
 > 适用范围：所有项目（Repository Generic）
 

@@ -1,5 +1,5 @@
 {
-    "version": "2.0.0",
+    "version": "2.0.2",
     "description": "AISE Git Governance — 治理能力注册表（含授权 + 审计）",
     "hooks": {
         "pre_commit": {

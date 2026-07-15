@@ -1,14 +1,14 @@
 {
-  "aise_version": "2.0.0",
+  "aise_version": "2.0.2",
   "schema_version": "1",
-  "released": "2026-07-14",
-  "status": "rc",
-  "description": "AISE v2.0.0 — Unified Project Memory Architecture",
+  "released": "2026-07-16",
+  "status": "frozen",
+  "description": "AISE v2.0.2 — AISE Protocol 1.0 Frozen",
   "governance": {
     "agent_governance_repo": "lovingxiong-dot/agent-governance",
     "aise_standard_repo": "lovingxiong-dot/aise-standard",
-    "aise_init_script": "agent-governance/scripts/aise-init.ps1",
-    "install_hooks_script": "agent-governance/scripts/install-hooks.ps1"
+    "aise_init_script": "agent-governance/runtime/commands/aise-init.ps1",
+    "install_hooks_script": "agent-governance/runtime/commands/install-hooks.ps1"
   },
   "changes_from_v1.0.0": {
     "new": [

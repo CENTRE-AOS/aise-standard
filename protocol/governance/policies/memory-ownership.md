@@ -1,6 +1,6 @@
 # Memory Ownership Contract
 
-> 版本：v2.0.0
+> 版本：v2.0.2
 > 状态：P0 强制
 > 适用范围：所有 Agent 进入任何 AISE 项目
 
