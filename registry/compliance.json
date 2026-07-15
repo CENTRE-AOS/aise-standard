@@ -1,6 +1,6 @@
 {
     "standard": "AISE",
-    "version": "2.0.0",
+    "version": "2.0.2",
     "schema_version": "1",
     "status": "frozen",
     "bootstrap_completed": false,
