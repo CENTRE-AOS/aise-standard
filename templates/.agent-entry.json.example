@@ -1,0 +1,8 @@
+{
+  "protocol": "AISE",
+  "version": "1.0.0",
+  "project_id": "example-project-uuid",
+  "governance": {
+    "provider": "agent-governance"
+  }
+}
