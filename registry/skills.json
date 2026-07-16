@@ -1,5 +1,5 @@
 {
-    "aise_version": "2.0.2",
+    "aise_version": "2.5.0frozen",
     "schema_version": "1",
     "skills": {
         "archive": {
@@ -8,7 +8,7 @@
             "description": "Git 存档工作流：变更分析→蓝图/日志更新→打标签→提交",
             "location": "Skills/archive/SKILL.md",
             "status": "frozen",
-            "version": "1.0.0"
+            "version": "2.5.0frozen"
         },
         "handoff": {
             "name": "Handoff",
@@ -16,15 +16,15 @@
             "description": "Agent 交接工作流：移交生成 HANDOFF.md；接替分析交接文档",
             "location": "Skills/handoff/SKILL.md",
             "status": "frozen",
-            "version": "1.0.0"
+            "version": "2.5.0frozen"
         },
         "gitops": {
             "name": "GitOps",
             "trigger": ["新建项目"],
             "description": "Git 初始化 + 项目骨架生成 + AISE 注入 + Git Hooks 安装",
             "location": "Skills/gitops/SKILL.md",
-            "status": "beta",
-            "version": "1.1.0"
+            "status": "frozen",
+            "version": "2.5.0frozen"
         },
         "review": {
             "name": "Review",
@@ -32,7 +32,7 @@
             "description": "代码/架构/文档一致性检查，生成 Review Report",
             "location": "Skills/review/SKILL.md",
             "status": "frozen",
-            "version": "1.0.0"
+            "version": "2.5.0frozen"
         },
         "publish": {
             "name": "Publish",
@@ -40,7 +40,7 @@
             "description": "构建产物 → 验证 → 生成 Release Notes → 更新 Manifest",
             "location": "Skills/publish/SKILL.md",
             "status": "frozen",
-            "version": "1.0.0"
+            "version": "2.5.0frozen"
         },
         "sync": {
             "name": "Sync",
@@ -48,7 +48,7 @@
             "description": "工作环境安全升级到指定版本，保留用户数据和配置",
             "location": "Skills/sync/SKILL.md",
             "status": "frozen",
-            "version": "1.0.0"
+            "version": "2.5.0frozen"
         },
         "fetch": {
             "name": "Fetch",
@@ -56,15 +56,15 @@
             "description": "从 GitHub 拉取最新版本，比较差异，可选合并",
             "location": "Skills/fetch/SKILL.md",
             "status": "frozen",
-            "version": "1.0.0"
+            "version": "2.5.0frozen"
         },
         "verify": {
             "name": "verify",
             "display": "AISE 合规验证",
             "triggers": ["验证", "verify", "检查合规"],
-            "version": "1.1.0",
-            "status": "beta",
-            "description": "V0-V7 合规检查：验证 AISE 系统完整性"
+            "version": "2.5.0frozen",
+            "status": "frozen",
+            "description": "V0-V10 合规检查：验证 AISE 系统完整性"
         }
     }
 }
