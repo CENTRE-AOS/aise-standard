@@ -2,6 +2,22 @@
     "aise_version": "2.5.0frozen",
     "schema_version": "1",
     "skills": {
+        "aise-bootstrap": {
+            "name": "AISE Bootstrap",
+            "trigger": [],
+            "description": "AISE 全局入口约束：进入新项目或不确定上下文时优先执行，加载 Identity → Asset → Context → Governance",
+            "location": "Skills/aise-bootstrap/SKILL.md",
+            "status": "frozen",
+            "version": "2.5.0frozen"
+        },
+        "aise-inject": {
+            "name": "AISE Inject",
+            "trigger": ["注入aise", "初始化aise", "补全aise"],
+            "description": "给已有 Git 项目注入 AISE Protocol 治理体系：创建 Protocol Manifest、.project/ 资产、入口文件、Git Hooks",
+            "location": "Skills/aise-inject/SKILL.md",
+            "status": "frozen",
+            "version": "2.5.0frozen"
+        },
         "archive": {
             "name": "Archive",
             "trigger": ["存档", "存档并push"],
@@ -59,12 +75,12 @@
             "version": "2.5.0frozen"
         },
         "verify": {
-            "name": "verify",
-            "display": "AISE 合规验证",
-            "triggers": ["验证", "verify", "检查合规"],
-            "version": "2.5.0frozen",
+            "name": "Verify",
+            "trigger": ["验证", "verify", "检查合规"],
+            "description": "AISE 合规验证：V0-V10 完整检查，输出 Compliance Report",
+            "location": "Skills/verify/SKILL.md",
             "status": "frozen",
-            "description": "V0-V10 合规检查：验证 AISE 系统完整性"
+            "version": "2.5.0frozen"
         }
     }
 }

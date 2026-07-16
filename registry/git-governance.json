@@ -35,27 +35,27 @@
         "fetch": {
             "enabled": true,
             "description": "安全 git fetch 替代 — 脏工作区警告但允许",
-            "script": "commands/aise-fetch.ps1"
+            "runtime_implementation": "agent-governance/runtime/commands/aise-fetch.ps1"
         },
         "update": {
             "enabled": true,
             "description": "安全 git pull 替代 — 脏工作区阻止",
-            "script": "commands/aise-update.ps1"
+            "runtime_implementation": "agent-governance/runtime/commands/aise-update.ps1"
         },
         "sync": {
             "enabled": true,
             "description": "完整 Sync Protocol Y0-Y7 — 含备份和验收",
-            "script": "commands/aise-sync.ps1"
+            "runtime_implementation": "agent-governance/runtime/commands/aise-sync.ps1"
         },
         "verify": {
             "enabled": true,
-            "description": "AISE 完整性校验 — 版本/目录/Hooks/入口/Registry",
-            "script": "commands/aise-verify.ps1"
+            "description": "AISE 完整性校验 — Protocol Manifest / 四协议 / Hooks / Registry",
+            "runtime_implementation": "agent-governance/runtime/commands/aise-verify.ps1"
         }
     },
     "version_check": {
         "enabled": true,
-        "description": "Hook 执行时检查项目 AISE/VERSION 与 hook 版本是否一致",
+        "description": "Hook 执行时检查项目 VERSION 与 hook 版本是否一致",
         "strict": true,
         "on_mismatch": "warning"
     },

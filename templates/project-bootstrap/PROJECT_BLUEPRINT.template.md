@@ -1,15 +1,17 @@
-# Project Blueprint
+# {project_name}
 
 ## 元信息
 
-| 项目名称 | {project_name} | 当前版本 | v0.1.0 | 存档次数 | 0 |
+| 项目 | 值 |
+|------|------|
+| 项目名称 | {project_name} |
+| 当前版本 | v0.1.0 |
+| 定义协议 | AISE Protocol 1.0 |
+| 治理 Runtime | agent-governance |
+| 状态 | Active |
+| 存档次数 | 0 |
 
-## Current Development Authority
-
-| Item | Value |
-|---|---|
-| Active branch | main |
-| Current version | v0.1.0 |
+---
 
 ## 项目定位
 
@@ -18,26 +20,34 @@
 ## 核心原则
 
 1. **GitHub 是 Single Source of Truth**：`origin` 指向 GitHub。
-2. **项目知识保存在项目内**：`.project/` 目录是长期知识的唯一来源。
-3. **任何工具都是可替换的执行者**：AI 只是执行者，Git 仓库才是永久资产。
+2. **项目资产属于项目**：`.project/` 是长期知识的唯一来源，不属于任何 Agent。
+3. **AI 是可替换的执行者**：Git 仓库和项目文档是永久资产。
+4. **AISE 不替代 Git**：AISE 是 Git 的上层协议，管理 Agent 工程状态。
 
 ## 技术栈
 
 | 层级 | 技术 |
 |------|------|
+| {层级} | {技术} |
 
 ## 目录结构
 
-```
-{project}/
-├── src/
-├── tests/
-├── docs/
-├── .project/
-├── .handoff/
-├── .sync/
-├── .backup/
-├── .gitignore
+```text
+{project_name}/
+├── .agent-entry.json          # Protocol Manifest
+├── .project/                  # 项目资产
+│   ├── context/
+│   ├── memory/
+│   │   ├── knowledge/
+│   │   ├── patterns/
+│   │   └── glossary/
+│   ├── decisions/
+│   ├── architecture/
+│   ├── journal/
+│   └── audit/
+├── src/                       # 业务代码
+├── tests/                     # 测试代码
+├── docs/                      # 技术文档
 ├── README.md
 ├── PROJECT_BLUEPRINT.md
 └── CHANGELOG.md
@@ -45,14 +55,8 @@
 
 ## 最近变更
 
-{latest_changes}
+- {date}: 项目初始化，注入 AISE Protocol 1.0
 
 ## 历史归档
 
-| 版本 | 标签 | 日期 | 摘要 |
-|------|------|------|------|
-
-## Agent 交接记录
-
-| 日期 | Agent | 类型 | 摘要 |
-|------|-------|------|------|
+_None_

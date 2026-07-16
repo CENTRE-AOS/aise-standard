@@ -1,7 +1,7 @@
 ---
 generated: {iso_8601_timestamp}
 agent: {ai_model_name}
-schema_version: 3.1
+schema_version: 1.0
 
 ## Mission
 {任务目标，一句话}

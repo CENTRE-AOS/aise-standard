@@ -3,16 +3,27 @@
 > 版本：v2.5.0frozen
 > 状态：Frozen
 > 适用范围：所有项目
+> 协议：AISE Protocol 1.0
 
 ## 1. 总则
 
 Agent Identity 确保在多 Agent 环境中每个 Agent 的身份可追溯。Capability Discovery 确保 AISE 能检测 Agent 能力是否满足执行要求。
 
+根据 AISE Protocol 1.0，**Agent 身份不由项目存储，而由 Governance Runtime 统一管理**。项目内不创建 `.agent/` 目录。
+
 ## 2. Agent Identity
 
-### identity.json
+### 2.1 身份来源
 
-位置：`.agent/identity.json`
+Agent 进入项目后：
+
+1. 读取 `.agent-entry.json` 确认项目身份与治理入口
+2. Governance Runtime 为当前会话生成 Agent Identity
+3. 所有审计日志关联该会话身份
+
+### 2.2 身份字段
+
+Governance Runtime 维护的 Agent Identity 示例：
 
 ```json
 {
@@ -26,40 +37,23 @@ Agent Identity 确保在多 Agent 环境中每个 Agent 的身份可追溯。Cap
 }
 ```
 
-### 多 Agent 环境
+### 2.3 禁止 `.agent/` 目录
 
-```
-Project
-  ├── Agent A (Codex)     → identity.json { agent: "codex", ... }
-  ├── Agent B (Claude)    → identity.json { agent: "claude", ... }
-  └── Agent C (Trae)      → identity.json { agent: "trae", ... }
-```
+`.agent/` 目录**禁止**出现在普通项目中。Agent 身份与能力声明由 Governance Runtime 在会话期间管理，不写入项目文件系统。
 
-### .agent/ 目录结构限制
-
-`.agent/` 目录仅允许以下文件：
-
-| 文件 | 用途 |
-|------|------|
-| `identity.json` | Agent 身份标识 |
-| `capability.json` | 能力声明 |
-| `session.json` | 会话状态 |
-
-禁止在 `.agent/` 中创建任何知识存储：
-
-- 禁止 `.agent/memory.md`
-- 禁止 `.agent/notes.md`
-- 禁止 `.agent/decisions/`
-- 禁止 `.agent/knowledge/`
-- 禁止任何其他非上述三文件的持久化存储
+**禁止**：
+- `.agent/identity.json`
+- `.agent/capability.json`
+- `.agent/session.json`
+- 任何 `.agent/` 下的文件或目录
 
 Memory 所有权规则详见 `Policies/memory-ownership.md`。
 
-所有审计日志自动关联 Agent Identity。
-
 ## 3. Capability Discovery
 
-### capability.json
+### 3.1 Capability 声明
+
+Governance Runtime 在会话开始时检测当前 Agent 能力：
 
 ```json
 {
@@ -90,14 +84,14 @@ Memory 所有权规则详见 `Policies/memory-ownership.md`。
 }
 ```
 
-### 能力检测
+### 3.2 能力检测
 
 Agent 进入项目后：
 
-```
-读取 .agent/capability.json
+```text
+读取 .agent-entry.json
     ↓
-检测 Agent 能力
+Governance Runtime 检测 Agent 能力
     ├── 满足 minimum_requirements → 进入完整模式
     ├── 满足部分 optional → 限制部分功能
     └── 不满足 minimum → 只读模式
@@ -105,9 +99,9 @@ Agent 进入项目后：
 输出 Capability Report
 ```
 
-### 能力报告
+### 3.3 能力报告
 
-```
+```text
 === AISE Capability Check ===
 
 Agent: DeepSeek-V4-Pro
@@ -147,8 +141,9 @@ Agent Identity 变化记录在 `.project/audit/agent-events.jsonl`：
 
 ## 6. 变更控制
 
-- 最低能力要求由 AISE 版本定义
+- 最低能力要求由 AISE Protocol 版本定义
 - Agent Identity 不可伪造
+- 禁止 Agent 绕过 Governance Runtime 创建私有身份存储
 
 ## 7. Agent 私有目录限制
 
@@ -156,6 +151,7 @@ Agent 不得创建以下目录作为长期知识存储：
 
 | 禁止目录 | 所属 Agent | 原因 |
 |----------|-----------|------|
+| `.agent/` | 任意 | Agent 身份由 Governance Runtime 管理，不属于项目资产 |
 | `.trae/` | Trae | 知识归属项目，不属于 Agent |
 | `.claude/` | Claude | 知识归属项目，不属于 Agent |
 | `.workbuddy/` | WorkBuddy | 知识归属项目，不属于 Agent |
@@ -166,37 +162,3 @@ Agent 不得创建以下目录作为长期知识存储：
 所有知识必须写入统一格式：`.project/memory/`。
 
 Memory 所有权规则详见 `Policies/memory-ownership.md`。
-
-## 8. Memory 所有权
-
-### 核心原则
-
-Project Memory 属于项目，不属于任何 Agent。
-
-### 统一入口
-
-所有 Agent 读写 Memory 的统一入口：
-
-```
-.project/memory/
-```
-
-### 生命周期
-
-```
-Agent 进入项目
-    ↓
-自动加载 Memory Index (.project/memory/index.md)
-    ↓
-Agent 执行任务（按需读取/写入 Memory）
-    ↓
-Agent 退出项目
-    ↓
-自动更新 Memory Index
-```
-
-### 约束
-
-- 任何 Agent 不得拥有独立的 Memory 存储
-- 所有 Agent 共享同一套 `.project/memory/` 知识库
-- Memory 格式和结构由项目统一定义，不与特定 Agent 绑定

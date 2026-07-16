@@ -3,41 +3,53 @@
 > 版本：v2.5.0frozen
 > 状态：Frozen
 > 适用范围：所有项目（Repository Generic）
+> 协议：AISE Protocol 1.0
 
 ## 1. 总则
 
-本合约定义所有项目必须维护的元数据文件格式，确保 AI 之间可以无缝接续，无需依赖外部上下文。
+本合约定义所有遵循 AISE Protocol 1.0 的项目必须维护的元数据文件格式，确保任何 Agent 进入项目后无需外部上下文即可理解项目结构与当前状态。
 
 ## 2. 必维护文件（Autonomous Mode）
 
 | 文件/目录 | 维护者 | 说明 |
 |-----------|--------|------|
-| AISE/VERSION | AI Agent | 语义化版本号，纯文本 |
-| CHANGELOG.md | AI Agent | 版本变更记录 |
-| PROJECT_BLUEPRINT.md | AI Agent | 项目蓝图与架构全景 |
-| .project/ | AI Agent | 项目知识库（decisions/ audit/ mission/） |
-| .handoff/ | AI Agent | Agent 交接上下文 |
-| .sync/ | AI Agent | 环境同步状态 |
-| AISE/Git-Governance/ | AI Agent | Git 原生出入口控制 |
-| AISE/Registry/ | AI Agent | 注册表（version/compliance/skills/routing/git-governance） |
+| `.agent-entry.json` | Protocol Runtime | Protocol Manifest，声明项目遵循 AISE Protocol 1.0 |
+| `VERSION` | AI Agent | 项目版本号，语义化版本或冻结版本（如 `v2.5.0frozen`） |
+| `CHANGELOG.md` | AI Agent | 版本变更记录 |
+| `PROJECT_BLUEPRINT.md` | AI Agent | 项目蓝图与架构全景 |
+| `.project/context/` | AI Agent | 项目当前状态（state.json、mission.json、timeline.jsonl） |
+| `.project/memory/` | AI Agent | 项目级知识资产（knowledge、patterns、glossary 索引） |
+| `.project/decisions/` | AI Agent | ADR 架构决策记录 |
+| `.project/architecture/` | AI Agent | 架构文档 |
+| `.project/journal/` | AI Agent | Agent 活动日志 |
+| `.project/audit/` | AI Agent | 合规审计日志 |
 
 | 例外 | 维护者 | 说明 |
 |------|--------|------|
-| secrets/.env | 用户 | 密钥和私有凭证 |
+| `secrets/.env` | 用户 | 密钥和私有凭证，Agent 禁止读取或修改 |
 
-## 3. VERSION 文件格式
+## 3. 禁止作为项目元数据的结构
+
+以下结构**禁止**出现在普通项目中：
+
+- `AISE/` 目录（协议规范由 aise-standard 集中维护）
+- `.agent/` 目录（Agent 身份由 Governance Runtime 管理）
+- `.trae/`、`.claude/`、`.workbuddy/` 等 Agent 私有目录
+- `.handoff/`、`.sync/`、`.backup/` 等旧 Runtime 目录
+
+## 4. VERSION 文件格式
 
 ```text
 <MAJOR>.<MINOR>.<PATCH>[-<pre-release>]
 ```
 
-示例：
+冻结版本示例：
 
 ```text
-1.1.0-beta.2
+2.5.0frozen
 ```
 
-## 4. CHANGELOG.md 格式
+## 5. CHANGELOG.md 格式
 
 遵循 [Keep a Changelog](https://keepachangelog.com/)：
 
@@ -56,7 +68,7 @@
 - <...>
 ```
 
-## 5. PROJECT_BLUEPRINT.md 格式
+## 6. PROJECT_BLUEPRINT.md 格式
 
 ```markdown
 # Project Blueprint
@@ -79,12 +91,9 @@
 
 ## 历史归档
 | 版本 | 标签 | 日期 | 摘要 |
-
-## Agent 交接记录
-| 日期 | Agent | 类型 | 摘要 |
 ```
 
-## 6. 审计日志格式
+## 7. 审计日志格式
 
 `.project/audit/` 目录下的 JSONL 日志：
 
@@ -94,7 +103,7 @@
 
 详见 `Policies/audit-policy.md`
 
-## 7. 变更控制
+## 8. 变更控制
 
 进入 Frozen 后：
 - 允许新增可选字段
