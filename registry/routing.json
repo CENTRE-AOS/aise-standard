@@ -1,5 +1,5 @@
 {
-    "aise_version": "2.0.2",
+    "aise_version": "2.5.0frozen",
     "schema_version": "1",
     "routes": {
         "archive": {

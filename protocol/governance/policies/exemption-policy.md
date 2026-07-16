@@ -1,6 +1,6 @@
 # AISE Exemption Protocol
 
-> 版本：v2.0.2
+> 版本：v2.5.0frozen
 > 状态：Frozen
 > 适用范围：所有项目
 
