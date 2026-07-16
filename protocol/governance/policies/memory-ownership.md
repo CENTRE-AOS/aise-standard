@@ -35,53 +35,40 @@
 | `.gemini/` | Gemini | 同上 |
 | `docs/agent-note.md` | 任意 | 无结构化，不可追溯 |
 
-### 例外：.agent/ 目录
+### 禁止：.agent/ 目录
 
-`.agent/` 目录**允许**存在，但**仅限**以下内容：
-
-```
-.agent/
-├── identity.json       # Agent 身份声明
-├── capability.json     # Agent 能力声明
-└── session.json        # 当前会话状态（临时）
-```
+`.agent/` 目录**禁止**作为项目级知识存储。Agent 身份与能力由 Governance Runtime 统一管理，不在项目内创建 `.agent/` 目录。
 
 **禁止**：
 - `.agent/memory.md`
 - `.agent/notes.md`
 - `.agent/decisions/`
-- 任何知识存储内容
+- `.agent/identity.json`
+- `.agent/capability.json`
+- 任何 `.agent/` 下的知识或身份存储内容
 
 ## 统一结构
 
 所有 Agent 知识统一存储在：
 
-```
+```text
 .project/
-├── memory/
+├── context/                # Context Protocol
+│   ├── state.json
+│   ├── mission.json
+│   └── timeline.jsonl
+├── memory/                 # 项目级知识资产
 │   ├── index.json          # Memory 索引
 │   ├── knowledge/          # 知识条目
-│   │   ├── K001-*.md
-│   │   └── K002-*.md
-│   ├── decisions/          # ADR 架构决策
-│   │   ├── ADR-001-*.md
-│   │   └── ADR-002-*.md
-│   ├── architecture/       # 架构文档
-│   │   ├── runtime.md
-│   │   └── data-flow.md
 │   ├── patterns/           # 设计模式与约定
-│   │   └── coding-standards.md
 │   └── glossary/           # 术语表
-│       └── terms.md
+├── decisions/              # ADR 决策记录
+├── architecture/           # 架构文档
 ├── journal/                # 活动日志（时间维度）
-│   └── 2026/
-│       └── 07/
-│           └── 14.json
-├── mission/                # Mission Boundary
-├── handoff/                # Agent 交接
-├── audit/                  # 审计日志
-└── releases/               # 发布记录
+└── audit/                  # 审计日志
 ```
+
+**注意**：Handoff 不是独立目录，而是 `.project/context/` 的派生视图。
 
 ## Memory Index 格式
 
@@ -89,7 +76,7 @@
 
 ```json
 {
-  "schema_version": "1.1.0",
+  "schema_version": "1.0",
   "last_updated": "2026-07-14T12:00:00+08:00",
   "knowledge": {
     "K001": {
@@ -165,11 +152,11 @@ Agent 进入项目时，AISE Verify 检查：
 
 已有 Agent 私有 memory 的项目迁移：
 
-1. 扫描所有 Agent 私有目录
+1. 扫描所有 Agent 私有目录（`.trae/`、`.claude/`、`.workbuddy/` 等）
 2. 提取知识内容
 3. 转换为统一格式写入 `.project/memory/`
 4. 删除 Agent 私有目录中的知识文件
-5. 保留 `.agent/` 中的 identity/capability/session
+5. 删除项目中的 `.agent/` 目录（身份由 Governance Runtime 管理）
 
 ## 变更控制
 

@@ -37,14 +37,8 @@
             "skill": "fetch",
             "description": "拉取最新版本"
         },
-        "git-gate": {
-            "trigger": ["aise fetch", "aise update", "aise sync", "aise verify"],
-            "skill": "git-gate",
-            "description": "Git 安全操作（使用 AISE commands 替代直接 git pull）"
-        },
         "verify": {
-            "route": "verify",
-            "triggers": ["验证", "verify", "检查合规"],
+            "trigger": ["验证", "verify", "检查合规"],
             "skill": "verify",
             "description": "AISE 合规验证"
         }

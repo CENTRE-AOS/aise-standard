@@ -1,58 +1,75 @@
 {
     "standard": "AISE",
     "version": "2.5.0frozen",
+    "protocol_version": "1.0",
     "schema_version": "1",
     "status": "frozen",
-    "bootstrap_completed": false,
-    "contracts_loaded": {
-        "engineering-contract": false,
-        "metadata-contract": false,
-        "repository-contract": false,
-        "handoff-protocol": false
+    "description": "AISE Protocol 1.0 Compliance Checklist — frozen with aise-standard v2.5.0frozen",
+    "required_files": {
+        "identity": [
+            ".agent-entry.json"
+        ],
+        "asset": [
+            "PROJECT_BLUEPRINT.md",
+            "CHANGELOG.md"
+        ],
+        "context": [
+            ".project/context/state.json",
+            ".project/context/mission.json",
+            ".project/context/timeline.jsonl"
+        ]
     },
-    "skills_loaded": {
-        "archive": false,
-        "handoff": false,
-        "gitops": false,
-        "review": false,
-        "publish": false,
-        "sync": false,
-        "fetch": false
-    },
-    "policies_loaded": {
-        "security-policy": false,
-        "git-policy": false,
-        "rollback-policy": false,
-        "exemption-policy": false,
-        "audit-policy": false,
-        "mission-boundary": false,
-        "adr-policy": false,
-        "agent-identity": false,
-        "upgrade-policy": false,
-        "memory-ownership": false
-    },
-    "required_policies": [
-        "security-policy",
-        "git-policy",
-        "rollback-policy",
-        "exemption-policy",
-        "audit-policy",
-        "mission-boundary",
-        "adr-policy",
-        "agent-identity",
-        "upgrade-policy",
-        "memory-ownership"
-    ],
     "required_directories": [
-        ".project/mission/",
-        ".project/decisions/",
-        ".agent/"
+        ".project/context",
+        ".project/memory",
+        ".project/decisions",
+        ".project/architecture",
+        ".project/journal",
+        ".project/audit"
     ],
-    "git_governance_loaded": false,
-    "exemption_enabled": false,
-    "audit_enabled": false,
-    "started_at": "",
-    "completed_at": "",
-    "agent_model": "",
-    "project_path": ""
+    "contracts": {
+        "required": [
+            "engineering-contract",
+            "metadata-contract",
+            "repository-contract",
+            "handoff-protocol"
+        ]
+    },
+    "policies": {
+        "required": [
+            "security-policy",
+            "git-policy",
+            "rollback-policy",
+            "exemption-policy",
+            "audit-policy",
+            "mission-boundary",
+            "adr-policy",
+            "agent-identity",
+            "upgrade-policy",
+            "memory-ownership"
+        ]
+    },
+    "skills": {
+        "required": [
+            "aise-bootstrap",
+            "aise-inject",
+            "archive",
+            "fetch",
+            "gitops",
+            "handoff",
+            "publish",
+            "review",
+            "sync",
+            "verify"
+        ]
+    },
+    "registry": {
+        "required": [
+            "version.json",
+            "skills.json",
+            "routing.json",
+            "git-governance.json",
+            "compliance.json"
+        ]
+    }
 }

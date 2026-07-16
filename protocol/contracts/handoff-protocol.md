@@ -17,8 +17,13 @@ Handoff Protocol 定义 AI Agent 之间的交接标准。任何符合本协议�
 
 ## 3. HANDOFF.md 位置
 
+HANDOFF 是 Context Protocol 的派生视图，不是独立目录。
+
 ```text
-<project>/.handoff/HANDOFF.md
+<project>/.project/context/handoff/latest.md
+<project>/.project/context/handoff/latest.json
+<project>/.project/context/handoff/history/{timestamp}.md
+<project>/.project/context/handoff/history/{timestamp}.json
 ```
 
 ## 4. 必填字段
@@ -57,14 +62,15 @@ Handoff Protocol 定义 AI Agent 之间的交接标准。任何符合本协议�
 
 接替 AI 按以下顺序读取：
 
-1. `.handoff/HANDOFF.md` — 交接文档（核心）
-2. `PROJECT_BLUEPRINT.md` — 项目蓝图
-3. `git log --oneline -15` — 最近变更历史
-4. `.project/audit/` — 治理事件日志
-5. `.project/decisions/` — 架构决策记录
-6. `AISE/Registry/skills.json` — 已注册技能
-7. `.project/mission/` — Mission Boundary
-8. `.agent/` — Agent 身份
+1. `.project/context/handoff/latest.md` — 交接文档（核心派生视图）
+2. `.project/context/handoff/latest.json` — 交接数据（Canonical JSON）
+3. `PROJECT_BLUEPRINT.md` — 项目蓝图
+4. `CHANGELOG.md` — 版本历史
+5. `git log --oneline -15` — 最近变更历史
+6. `.project/audit/` — 治理事件日志
+7. `.project/decisions/` — 架构决策记录
+8. `.project/context/mission.json` — 当前任务
+9. `.agent-entry.json` — Protocol Manifest
 
 ## 7. Decision Log 约束
 
@@ -79,7 +85,7 @@ Handoff Protocol 定义 AI Agent 之间的交接标准。任何符合本协议�
 初次移交后，后续移交必须增量采集：
 - 从上一次 HANDOFF 的 generated 时间戳开始
 - 只采集新产生的 Decision Log
-- 保留旧 HANDOFF 的完整历史归档
+- 保留旧 HANDOFF 的完整历史归档于 `.project/context/handoff/history/`
 
 ## 9. 变更控制
 
