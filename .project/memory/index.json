@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "project": "aise-standard",
+  "updated_at": "2026-07-16T01:05:00+08:00",
+  "entries": {
+    "knowledge": [
+      "knowledge/v1.2-protocol-freeze.json"
+    ],
+    "decisions": [
+      "decisions/ADR-005-aise-standard-vs-governance-boundary.md"
+    ],
+    "architecture": [],
+    "patterns": [],
+    "glossary": []
+  }
+}

@@ -1,0 +1,11 @@
+# Runtime Evidence — 不进 Git
+.project/audit/
+.project/context/
+.project/handoff/
+
+# Temporary Artifacts
+*.bak
+*.tmp
+*.swp
+.DS_Store
+Thumbs.db
