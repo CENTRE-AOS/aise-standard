@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "aise://protocols/identity/schema.json",
+  "title": "AISE Identity Protocol Schema",
+  "description": "Defines how a project declares its identity to any AISE-compliant agent.",
+  "type": "object",
+  "required": ["protocol", "version", "project_id"],
+  "properties": {
+    "protocol": {
+      "type": "string",
+      "const": "AISE",
+      "description": "Protocol identifier. Must be 'AISE'."
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+(\\.\\d+)?$",
+      "description": "AISE Protocol version this project follows. Example: '1.0'."
+    },
+    "project_id": {
+      "type": "string",
+      "description": "Project unique identifier. UUID or repository identity."
+    },
+    "project": {
+      "type": "object",
+      "description": "Project-level metadata (NOT AISE Protocol version).",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "Project version (SemVer, frozen, or project-defined format). Decoupled from AISE Protocol version and Governance Runtime version."
+        }
+      }
+    },
+    "governance": {
+      "type": "object",
+      "required": ["provider"],
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Protocol Runtime provider, e.g. 'agent-governance'."
+        },
+        "runtime": {
+          "type": "string",
+          "description": "Governance Runtime version, e.g. '2.5.0frozen'. Used by aise-verify to check runtime compatibility."
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

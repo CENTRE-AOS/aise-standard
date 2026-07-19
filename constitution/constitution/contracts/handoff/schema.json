@@ -1,0 +1,56 @@
+{
+  "$schema": "centre://contracts/handoff/schema.json",
+  "schema_id": "aise.handoff.context-reference",
+  "schema_version": "2.0",
+  "description": "AISE Handoff Context Reference Schema — 定义 Agent 交接时的上下文快照结构。应存放在 aos-protocol-factory/Contracts/handoff/，由 Runtime 执行。",
+  "required_fields": [
+    "snapshot_id",
+    "schema_version",
+    "exported_at",
+    "agent_context",
+    "runtime_context",
+    "project_context",
+    "task_context",
+    "git_context"
+  ],
+  "field_definitions": {
+    "snapshot_id": "快照唯一标识，格式: hs-YYYYMMDDHHmmss-NNNN",
+    "schema_version": "Schema 版本，当前为 2.0",
+    "exported_at": "导出时间戳，ISO 8601",
+    "agent_context": "导出 Agent 的上下文：agent_id, type, fingerprint, provider, capability",
+    "runtime_context": "导出 Runtime 的上下文：runtime_id, fingerprint, version, protocol_version",
+    "project_context": "项目上下文，来自 IContext.Get-ContextSnapshot()",
+    "task_context": "任务上下文：current_task, objective, decisions, blockers",
+    "git_context": "Git 上下文：branch, last_commit, uncommitted_count（由外部 Git Capability 提供，Skill 不直接调用 Git）",
+    "handoff_note": "交接备注（可选）"
+  },
+  "agent_context_schema": {
+    "agent_id": "IIdentity 生成的 Agent 唯一标识",
+    "type": "agent",
+    "fingerprint": "Agent 身份指纹",
+    "provider": "trae | workbuddy | claude | cursor | vscode | unknown",
+    "hostname": "运行 Agent 的主机名",
+    "capability": "Agent 能力列表"
+  },
+  "runtime_context_schema": {
+    "runtime_id": "IIdentity 生成的 Runtime 唯一标识",
+    "fingerprint": "Runtime 身份指纹",
+    "version": "Runtime 版本",
+    "protocol_version": "协议版本",
+    "centre_home": "CENTRE_HOME 路径"
+  },
+  "task_context_schema": {
+    "current_task": "当前任务描述",
+    "objective": "任务目标",
+    "decisions": "已做出的决策列表",
+    "blockers": "当前阻塞项列表"
+  },
+  "git_context_schema": {
+    "branch": "当前分支",
+    "last_commit": "最后一次提交摘要",
+    "uncommitted": "未提交变更数量"
+  },
+  "design_note": "Git 上下文由外部 Git Capability 提供，Skill 不直接调用 git 命令。未来支持 SVN、Perforce 等版本控制系统时，只需替换 Capability 实现。",
+  "storage_location": ".project/handoff/snapshot-{snapshot_id}.json",
+  "ownership": "Project owns context。不是 .runtime/handoff/，不是 .agent/handoff/"
+}

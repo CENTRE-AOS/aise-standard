@@ -1,0 +1,209 @@
+{
+    "version": "2.5.0frozen",
+    "description": "AISE Git Governance Policies — Hook 执行策略配置 + 豁免 + 审计",
+    "gates": {
+        "pull": {
+            "enabled": true,
+            "description": "Pull/Fetch/Checkout Gate — 入口检查",
+            "checks": {
+                "check_workspace_clean": {
+                    "enabled": true,
+                    "description": "检查工作区是否干净，防止覆盖未提交修改"
+                },
+                "check_aise_version": {
+                    "enabled": true,
+                    "description": "检查本地 AISE 版本与远程差异"
+                },
+                "check_branch": {
+                    "enabled": true,
+                    "description": "检查当前分支是否合法"
+                }
+            }
+        },
+        "commit": {
+            "enabled": true,
+            "description": "Pre-Commit Gate — 提交前检查",
+            "checks": {
+                "check_file_boundary": {
+                    "enabled": true,
+                    "description": "文件边界检查：仅允许 AISE 授权路径"
+                },
+                "check_sensitive_files": {
+                    "enabled": true,
+                    "description": "敏感文件检查：阻止 .env、secrets、credentials、密钥文件"
+                },
+                "check_changelog_sync": {
+                    "enabled": true,
+                    "description": "文档同步检查：代码变更时要求 CHANGELOG.md 同步更新"
+                },
+                "check_tests": {
+                    "enabled": false,
+                    "description": "测试检查：代码变更时要求测试通过（可选，默认关闭）"
+                }
+            },
+            "allowed_paths": [
+                "src/",
+                "tests/",
+                "docs/",
+                "config/",
+                "PROJECT_BLUEPRINT.md",
+                "CHANGELOG.md",
+                "VERSION",
+                ".agent-entry.json",
+                ".project/",
+                "README.md",
+                ".gitignore",
+                "package.json",
+                "requirements.txt",
+                "pyproject.toml",
+                "Cargo.toml",
+                "go.mod",
+                "Makefile",
+                "Dockerfile",
+                ".github/"
+            ],
+            "blocked_patterns": [
+                ".env",
+                ".env.*",
+                "secrets/",
+                "credentials/",
+                "*.key",
+                "*.pem",
+                "*.pfx",
+                "*.p12",
+                "*.jks",
+                "*.keystore",
+                "id_rsa*",
+                "id_ed25519*"
+            ],
+            "code_extensions": [
+                ".py", ".js", ".ts", ".tsx", ".jsx", ".go", ".rs",
+                ".java", ".kt", ".swift", ".cpp", ".c", ".h",
+                ".rb", ".php", ".cs", ".sql", ".sh", ".ps1",
+                ".yaml", ".yml", ".json", ".toml", ".xml"
+            ]
+        },
+        "commit_message": {
+            "enabled": true,
+            "description": "Commit Message Gate — 提交消息格式检查",
+            "format": "<type>(<scope>): <summary> [test:<pass>/<total>] [hint:<keyword>] (by AI-<model>)",
+            "allowed_types": [
+                "feat",
+                "fix",
+                "chore",
+                "docs",
+                "refactor",
+                "test",
+                "infra",
+                "perf"
+            ],
+            "format_pattern": "^(feat|fix|chore|docs|refactor|test|infra|perf)\\(.+\\): .+$",
+            "allow_merge_commits": true,
+            "allow_revert_commits": true
+        },
+        "push": {
+            "enabled": true,
+            "description": "Pre-Push Gate — 推送前检查",
+            "checks": {
+                "check_remote": {
+                    "enabled": true,
+                    "description": "Remote 验证：必须为 origin"
+                },
+                "block_force_push": {
+                    "enabled": true,
+                    "description": "禁止 Force Push"
+                },
+                "block_tags_flag": {
+                    "enabled": true,
+                    "description": "禁止 --tags 推送全部标签"
+                },
+                "block_branch_delete": {
+                    "enabled": true,
+                    "description": "禁止删除保护分支"
+                },
+                "check_archive_status": {
+                    "enabled": true,
+                    "description": "检查 HEAD 是否已归档（打标签），仅对 main/release 分支强制警告",
+                    "enforced_on_protected_branches": true,
+                    "warning_on_feature_branches": false,
+                    "protected_branches": ["main", "master", "release/*"]
+                }
+            },
+            "protected_branches": [
+                "main",
+                "master"
+            ],
+            "allowed_remote": "origin"
+        },
+        "merge": {
+            "enabled": true,
+            "description": "Post-Merge Gate — 合并后检查",
+            "checks": {
+                "check_aise_version": {
+                    "enabled": true,
+                    "description": "检查合入后 AISE 版本变化"
+                },
+                "check_dependencies": {
+                    "enabled": true,
+                    "description": "检查是否有新依赖"
+                },
+                "check_tests": {
+                    "enabled": false,
+                    "description": "提示是否需要重新运行测试"
+                },
+                "generate_report": {
+                    "enabled": true,
+                    "description": "生成合并报告"
+                }
+            }
+        }
+    },
+    "exemption": {
+        "enabled": true,
+        "description": "豁免协议 — 用户授权临时绕过特定规则",
+        "permission_levels": {
+            "P0": {
+                "description": "安全底线 — 永不可豁免",
+                "rules": ["sensitive_files", "branch_delete"],
+                "exemptible": false
+            },
+            "P1": {
+                "description": "工程操作 — 需用户明确确认",
+                "rules": ["C6", "CHANGELOG_SYNC", "force_push", "remote_change"],
+                "exemptible": true,
+                "requires_user_confirmation": true,
+                "expiration": "once"
+            },
+            "P2": {
+                "description": "普通操作 — 自动允许",
+                "rules": [],
+                "exemptible": true,
+                "requires_user_confirmation": false
+            }
+        },
+        "exemption_file": ".project/decisions/exemptions.md",
+        "auto_consume": true
+    },
+    "audit": {
+        "enabled": true,
+        "description": "审计追踪 — 所有治理事件可追溯",
+        "log_dir": ".project/audit/",
+        "logs": {
+            "gate_events": {
+                "file": "gate-events.jsonl",
+                "description": "Hook 执行记录",
+                "rotation": "10MB"
+            },
+            "agent_events": {
+                "file": "agent-events.jsonl",
+                "description": "Agent 行为记录",
+                "rotation": "10MB"
+            },
+            "authorization_events": {
+                "file": "authorization-events.jsonl",
+                "description": "豁免授权记录",
+                "rotation": "10MB"
+            }
+        }
+    }
+}

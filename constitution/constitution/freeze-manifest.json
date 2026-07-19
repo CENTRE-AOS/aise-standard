@@ -1,0 +1,85 @@
+{
+  "foundation": "v3.0",
+  "status": "frozen",
+  "frozen_at": "2026-07-18T12:00:00Z",
+  "protocol": {
+    "centre": "2.0.0-frozen",
+    "aise": "3.0.0-frozen"
+  },
+  "architecture": {
+    "rfc": "0007.2",
+    "protocol_id": "centre.production.architecture.v1.2",
+    "version": "1.2.0",
+    "status": "frozen"
+  },
+  "evolution_channel": "RFC-0008",
+  "frozen_boundaries": [
+    "Kernel Boundary",
+    "Contract Model",
+    "Certificate Hierarchy",
+    "Package Model",
+    "Admission Architecture",
+    "Capability Plane",
+    "Agent Binding Protocol",
+    "Bootstrap Surface Definition"
+  ],
+  "frozen_principles": [
+    "Authority Separation",
+    "Runtime Boundary",
+    "Non-Ownership",
+    "Contract-Centric Binding",
+    "Kernel Sovereignty",
+    "Capability Plane Separation",
+    "Skill Last Mile"
+  ],
+  "kernel": {
+    "version": "v3.0.0frozen",
+    "components": [
+      "Identity Engine",
+      "Certificate Validator",
+      "Contract Resolver",
+      "Admission Controller",
+      "Lifecycle Manager",
+      "Event Bus",
+      "Registry",
+      "State Machine"
+    ]
+  },
+  "contract_system": {
+    "version": "1.0",
+    "status": "frozen",
+    "contracts": [
+      "environment.contract.json",
+      "agent.contract.json",
+      "capability.contract.json",
+      "binding.contract.json"
+    ]
+  },
+  "agent_binding_protocol": {
+    "version": "1.0",
+    "status": "frozen",
+    "hosts": ["trae", "codex", "cursor"]
+  },
+  "capability_service_plane": {
+    "version": "0.1.0",
+    "status": "frozen",
+    "services": [
+      "Gateway Service",
+      "MCP Service",
+      "Context Service",
+      "Memory Service",
+      "Audit Service",
+      "Federation Service"
+    ]
+  },
+  "implementation_phase": {
+    "priority": [
+      "CENTRE Kernel v3.0",
+      "Contract System",
+      "Agent Binding Protocol",
+      "Installer / Package Distribution",
+      "Host Adapter",
+      "Capability Service Plane MVP"
+    ]
+  }
+}

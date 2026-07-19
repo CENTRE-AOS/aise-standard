@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "aise://protocols/governance/schema.json",
+  "title": "AISE Governance Protocol Schema",
+  "description": "Defines how project governance is enforced by a Protocol Runtime.",
+  "type": "object",
+  "required": ["runtime", "commands", "policies"],
+  "properties": {
+    "runtime": {
+      "type": "object",
+      "required": ["provider"],
+      "properties": {
+        "provider": { "type": "string", "examples": ["agent-governance"] }
+      }
+    },
+    "commands": {
+      "type": "array",
+      "items": { "type": "string" },
+      "examples": [
+        "aise init",
+        "aise bootstrap",
+        "aise sync",
+        "aise audit",
+        "aise migrate",
+        "aise validate",
+        "aise commit",
+        "aise archive"
+      ]
+    },
+    "policies": {
+      "type": "array",
+      "items": { "type": "string" },
+      "examples": [
+        "git-policy",
+        "memory-ownership",
+        "mission-boundary",
+        "audit-policy",
+        "upgrade-policy",
+        "rollback-policy"
+      ]
+    },
+    "registry": {
+      "type": "object",
+      "properties": {
+        "installed_projects": { "type": "string", "const": "registry/installed_projects.json" },
+        "protocol_versions": { "type": "string", "const": "registry/protocol_versions.json" },
+        "runtime_adapters": { "type": "string", "const": "registry/runtime_adapters.json" }
+      }
+    }
+  }
+}

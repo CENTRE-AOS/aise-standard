@@ -1,0 +1,39 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "aise://protocols/context/schema.json",
+  "title": "AISE Context Protocol Schema",
+  "description": "Defines how project context is recorded, restored, and reconstructed from events.",
+  "type": "object",
+  "required": ["canonical_source", "derived_views"],
+  "properties": {
+    "canonical_source": {
+      "type": "object",
+      "required": ["path", "format"],
+      "properties": {
+        "path": { "type": "string", "const": ".project/context/timeline.jsonl" },
+        "format": { "type": "string", "const": "jsonl" }
+      }
+    },
+    "derived_views": {
+      "type": "object",
+      "properties": {
+        "state": { "type": "string", "const": ".project/context/state.json" },
+        "mission": { "type": "string", "const": ".project/context/mission.json" },
+        "handoff_json": { "type": "string", "const": ".project/context/handoff/latest.json" },
+        "handoff_md": { "type": "string", "const": ".project/context/handoff/latest.md" }
+      }
+    },
+    "event_types": {
+      "type": "array",
+      "items": { "type": "string" },
+      "examples": [
+        "agent.bootstrap",
+        "task.started",
+        "task.completed",
+        "decision.accepted",
+        "handoff.created",
+        "memory.updated"
+      ]
+    }
+  }
+}

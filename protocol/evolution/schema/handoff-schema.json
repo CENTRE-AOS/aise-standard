@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "schema_name": "Handoff Schema",
+  "description": "Standardized handoff format for AI Agent task completion. Generated at the end of every Agent task. Conforms to AISE Protocol 1.0 Context Protocol.",
+  "location": ".project/context/handoff/latest.json",
+  "history_location": ".project/context/handoff/history/{timestamp}.json",
+  "fields": {
+    "handoff_version": {"type": "string", "required": true, "description": "Handoff schema version, aligned with AISE Protocol 1.0"},
+    "project_name": {"type": "string", "required": true, "description": "Project name matching project_id in .agent-entry.json"},
+    "generated_at": {"type": "string", "format": "ISO 8601", "required": true, "description": "Timestamp when handoff was generated"},
+    "generated_by": {"type": "string", "required": true, "description": "AI Model name that generated this handoff"},
+    "current_branch": {"type": "string", "required": true, "description": "Active branch at time of handoff"},
+    "current_commit": {"type": "string", "required": true, "description": "Full SHA of HEAD commit"},
+    "completed_tasks": {"type": "array", "items": {"type": "string"}, "required": true, "description": "List of tasks completed in this session"},
+    "modified_files": {"type": "array", "items": {"type": "string"}, "required": true, "description": "List of files modified"},
+    "current_state": {"type": "string", "required": true, "description": "High-level description of the project state at handoff"},
+    "next_tasks": {"type": "array", "items": {"type": "string"}, "required": true, "description": "Recommended next tasks for the next Agent"},
+    "risks": {"type": "array", "items": {"type": "string"}, "required": false, "description": "Known risks, issues, or warnings"},
+    "environment": {"type": "object", "required": true, "properties": {"os": {"type": "string"}, "git_remote": {"type": "string"}, "workspace_type": {"type": "string", "enum": ["local", "cloud"]}}}
+  },
+  "example": {
+    "handoff_version": "1.0",
+    "project_name": "agent-workbench",
+    "generated_at": "2026-07-10T18:00:00+08:00",
+    "generated_by": "AI-DeepSeek-V4-Pro",
+    "current_branch": "v6-agent",
+    "current_commit": "afbec07acc34ded3df0084dd58043bd0b1549519",
+    "completed_tasks": ["GitHub migration completed", "Main branch synced", "Gitee frozen"],
+    "modified_files": ["CHANGELOG.md", "PROJECT_BLUEPRINT.md"],
+    "current_state": "V6 migration complete. GitHub is single source of truth.",
+    "next_tasks": ["Continue V6 feature development", "Refine UI components"],
+    "risks": ["HTTPS blocked in China without proxy; SSH is primary"],
+    "environment": {"os": "windows", "git_remote": "git@github.com:lovingxiong-dot/agent-workbench.git", "workspace_type": "local"}
+  }
+}
