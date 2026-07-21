@@ -1,0 +1,39 @@
+{
+  "identity": "aise-standard-v2.0.0-frozen",
+  "authority": "protocol",
+  "authority_level": "A0",
+  "lifecycle": "production",
+  "remote_status": "pending",
+  "repository": {
+    "name": "aise-standard",
+    "name_frozen": "aise-standard",
+    "local_path": "aise-standard",
+    "owner": "CENTRE-AOS",
+    "full_name": "aise-standard",
+    "url": "github.com/CENTRE-AOS/aise-standard",
+    "visibility": "public",
+    "visibility_reason": "Protocol 是治理标准，需要生态传播和公共审查"
+  },
+  "release_source": "github-release",
+  "allowed_consumer": ["aos-factory"],
+  "bootstrap_contract": {
+    "required_files": ["AGENTS.md", "AGENT_CONTEXT.md"],
+    "version": "1.0.0"
+  },
+  "branch_policy": {
+    "release_branch": "main",
+    "protected": true,
+    "require_review": true,
+    "allowed_branches": ["main", "develop", "feature/*", "fix/*"]
+  },
+  "supply_chain": {
+    "upstream": {},
+    "downstream": {
+      "factory": {
+        "repository": "aos-factory",
+        "consumes": "protocol-release",
+        "version": "2.0.0-frozen"
+      }
+    }
+  }
+}

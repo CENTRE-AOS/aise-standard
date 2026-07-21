@@ -3,7 +3,7 @@
 > 版本: 1.0.0
 > 状态: Frozen
 > 日期: 2026-07-17
-> 适用范围: CENTRE Gateway Runtime Control Plane v0.1
+> 适用范围: CENTRE Gateway Runtime Control Plane v3.2.0
 > 前置: CENTRE Gateway Runtime Constitution v1.0.0frozen
 
 ---
@@ -132,6 +132,77 @@ Runtime 必须记录所有状态转换事件：
 }
 ```
 
+### 2.6 Bootstrap Interface
+
+Runtime 必须在启动时加载 Bootstrap Contract：
+
+```
+Agent Arrival
+      │
+      ▼
+AGENTS.md           ← Layer 1: Universal Agent Instruction (行为规则)
+      │
+      ▼
+AGENT_CONTEXT.md    ← Layer 2: CENTRE Identity Contract (世界模型)
+      │
+      ▼
+PROJECT_STATE.json  ← Layer 3: Repository State (当前状态)
+      │
+      ▼
+PROJECT_BLUEPRINT.md ← Layer 4: Architecture Truth (架构真相)
+```
+
+**Bootstrap 失败条件**：
+- AGENTS.md 不存在 → 降级为只读模式，Agent 不可修改任何文件
+- AGENT_CONTEXT.md 不存在 → 终止，Agent 不知道自己在哪
+- Authority Ranking 无法建立 → 终止，Agent 无法区分真实与历史
+- Repository Identity 不明确 → 降级为只读模式
+
+**必须加载的文件**：
+- `AGENTS.md` — Universal Agent Instruction
+- `AGENT_CONTEXT.md` — CENTRE Identity Contract
+
+**Bootstrap 生命周期**（v3.2.0 新增）：
+
+Bootstrap Engine 支持三种模式：
+
+```
+Bootstrap Engine
+       │
+       ├── BIRTH    — Agent 首次进入工作区
+       ├── RESTORE  — Agent 接替 Handoff 恢复上下文
+       └── RECOVERY — Agent 上下文损坏后重建
+```
+
+| 模式 | 触发条件 | 输入 | 输出 |
+|------|---------|------|------|
+| BIRTH | Agent 首次进入 | 工作区文件系统 | Bootstrap Report |
+| RESTORE | Handoff 接替 | Handoff Bootstrap State + 当前文件系统 | Restore Report (RESTORED/PARTIAL/FAILED) |
+| RECOVERY | 上下文损坏 | 最小可用资产 | Recovery Report (PARTIAL_RECOVERY/MINIMAL_RECOVERY/FAILED) |
+
+**RESTORE 流程**：
+1. 读取 Handoff Bootstrap State（移交时的 AGENTS.md/AGENT_CONTEXT.md 完整性、Authority Level、Source Authority）
+2. 对比当前 AGENTS.md/AGENT_CONTEXT.md 是否与移交时一致
+3. 验证上下文连续性
+4. 重新建立 Context Boundary
+
+**约束**：
+- 只有一个 Bootstrap Engine 实现（aise-bootstrap），不允许 handoff 或其他 Skill 自行实现 Bootstrap Restore
+- Handoff RESUME 必须调用 `aise-bootstrap.restore()` 而非自己验证 Bootstrap Context
+- Bootstrap Restore 是 Admission 的前置条件
+
+### 2.7 Governance Loop Interface
+
+Runtime 必须实现六阶段治理闭环：
+
+```
+OBSERVE → EVALUATE → DECIDE → EXECUTE → RECORD → UPDATE
+```
+
+定义详见 `runtime/kernel/governance-loop/governance-loop.md`（RFC-0008）。
+
+Governance Loop 在 Bootstrap Phase 完成后启动，确保 Agent 在正确的上下文和 Authority 下执行操作。
+
 ## 3. 版本模型
 
 CENTRE 采用三层版本模型：
@@ -139,20 +210,21 @@ CENTRE 采用三层版本模型：
 | 层 | 版本 | 生命周期 | 职责 |
 |----|------|---------|------|
 | Protocol | 2.0.0-frozen | 慢 | Constitution, Contract, Identity Schema, Communication Rules |
-| Runtime | 2.1.0 | 中 | StateMachine, SkillManager, Registry, Event Engine |
-| CLI | 2.2.0 | 快 | install, verify, skills, handoff |
+| Runtime | 3.2.0 | 中 | StateMachine, SkillManager, Registry, Event Engine, Governance Loop, Bootstrap |
+| CLI | 3.2.0 | 快 | install, verify, skills, handoff |
 
 版本声明位置：
 
-- Protocol: `aos-protocol-factory` (GitHub Release Artifact)
+- Protocol: `aise-standard` (GitHub Release Artifact)
 - Runtime: `VERSION`, `.agent-entry.json`, `protocol_versions.json`
 - CLI: `runtime/cli/centre.ps1`
 
 ## 4. 不可违背约束
 
-1. Runtime 不定义协议 — 协议定义属于 aos-protocol-factory
+1. Runtime 不定义协议 — 协议定义属于 aise-standard
 2. Runtime 不拥有项目资产 — 资产属于 Project
 3. Runtime 不直接暴露 Skill 执行 — 必须通过 StateMachine
 4. Skill 归属 Runtime，不属于 Agent
 5. 所有状态转换必须通过 Audit 记录
 6. CLI 是薄包装器，规则在 Protocol 中
+7. Runtime 启动前必须完成 Bootstrap Phase（加载 AGENTS.md + AGENT_CONTEXT.md）

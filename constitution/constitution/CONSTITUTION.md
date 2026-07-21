@@ -3,8 +3,8 @@
 > 版本: 1.0.0frozen
 > 状态: Frozen
 > 日期: 2026-07-17
-> 适用范围: aos-runtime v3.1.0
-> 前置: AISE Protocol Constitution (aos-protocol-factory)
+> 适用范围: aos-runtime v3.2.0
+> 前置: CENTRE Protocol Constitution (aise-standard)
 
 ---
 
@@ -72,14 +72,14 @@ Reference Runtime 必须保持 AISE Protocol 完整兼容，但不代表所有 R
 ```
 逻辑身份: CENTRE Gateway Runtime
 物理仓库: aos-runtime（仓库名冻结，不随逻辑升级改名）
-协议仓库: aos-protocol-factory（AISE Protocol 定义来源）
+协议仓库: aise-standard（CENTRE Protocol 定义来源）
 ```
 
 ### 1.4 我不是什么
 
 | 不是 | 原因 |
 |------|------|
-| 协议定义者 | 协议由 aos-protocol-factory 定义，Runtime 只执行 |
+| 协议定义者 | 协议由 aise-standard 定义，Runtime 只执行 |
 | 项目管理平台 | Project 是独立生命实体，拥有自己的 CENTRE Identity |
 | Agent 调度器 | Agent 自主决策，Runtime 只验证准入，不管理生命周期 |
 | CENTRE OS 本身 | Runtime 只是执行层，不是架构体系全部 |
@@ -208,7 +208,7 @@ Runtime 定义身份契约，不存储身份数据：
 ### 4.2 不是我的职责
 
 ```
-├── 定义协议规则 → 属于 aos-protocol-factory
+├── 定义协议规则 → 属于 aise-standard
 ├── 存储项目记忆 → 属于 Workbench Memory System
 ├── 管理 Agent 生命周期 → Agent 自主管理
 ├── 签发加密证书 → 属于未来 Certificate Authority
@@ -474,13 +474,13 @@ AOS_HOME     → 向后兼容别名，指向 CENTRE_HOME
 
 | 仓库名 | 逻辑身份 | 职责 |
 |--------|---------|------|
-| `aos-protocol-factory` | AISE Protocol Specification | 定义协议，不执行 |
+| `aise-standard` | CENTRE Protocol Specification | 定义协议，不执行 |
 | `aos-runtime` | CENTRE Gateway Runtime | 执行协议，不定义 |
 
 ### 8.2 Repository Sovereignty
 
 ```
-aos-protocol-factory
+aise-standard
 拥有协议定义权
 
 aos-runtime
@@ -568,7 +568,7 @@ v2.0.0frozen 冻结的 6 个接口签名，v3.0, v4.0 不得变更。
 
 | 文档 | 位置 | 职责 |
 |------|------|------|
-| AISE Protocol Constitution | `aos-protocol-factory/Protocols/CONSTITUTION.md` | 定义 AISE 工程协议规则 |
+| AISE Protocol Constitution | `aise-standard/constitution/CONSTITUTION.md` | 定义 AISE 工程协议规则 |
 | CENTRE Gateway Runtime Constitution | `aos-runtime/constitution/CONSTITUTION.md` | 定义 Runtime 身份与边界 |
 
 两者关系：

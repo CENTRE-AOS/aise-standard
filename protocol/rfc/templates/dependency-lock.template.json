@@ -1,0 +1,18 @@
+{
+  "repository": "aos-factory",
+  "version": "1.1.0",
+  "dependencies": {
+    "protocol": {
+      "repository": "aise-standard",
+      "version": "2.0.0-frozen",
+      "source": "github-release",
+      "release_tag": "v2.0.0-frozen"
+    },
+    "runtime": {
+      "repository": "aos-runtime",
+      "version": "3.2.0",
+      "source": "github-release",
+      "release_tag": "v3.2.0"
+    }
+  }
+}

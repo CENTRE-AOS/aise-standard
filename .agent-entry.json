@@ -1,0 +1,21 @@
+{
+  "protocol_id": "AISE",
+  "protocol_version": "2.0.0-frozen",
+  "schema_version": "1.0",
+  "project_id": "aise-standard",
+  "project_role": "Protocol Authority",
+  "project_name": "CENTRE Protocol Specification",
+  "legacy_name": "AISE Standard",
+  "authority": {
+    "type": "protocol",
+    "defines": ["Constitution", "Contracts", "Schemas", "Governance Rules"],
+    "does_not_own": ["Runtime State", "Agent Memory", "Project Context", "Build Logic"]
+  },
+  "compatibility": {
+    "centre_foundation": ">=3.2.0",
+    "protocol_generation": "2.x",
+    "supersedes": ["AISE 1.0.0-frozen", "AISE 1.1.x"]
+  },
+  "created_at": "2026-07-19T00:00:00Z",
+  "updated_at": "2026-07-20T00:00:00Z"
+}

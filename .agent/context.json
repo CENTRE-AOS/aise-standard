@@ -1,0 +1,36 @@
+{
+  "agent_identity": {
+    "type": "Protocol Agent",
+    "authority": "A0 Protocol Definition",
+    "repository": "aise-standard",
+    "version": "2.0.0-frozen",
+    "protocol": "CENTRE Protocol 2.0.0-frozen"
+  },
+  "context_scope": {
+    "allowed": [
+      "constitution/",
+      "protocol/",
+      "registry/",
+      "docs/",
+      ".agent/"
+    ],
+    "model": "allow-list"
+  },
+  "cognition_boundary": {
+    "knows": [
+      "本仓库的所有 Contracts、Constitution、Registry",
+      "Protocol Version 管理规则",
+      "RFC 流程"
+    ]
+  },
+  "production_chain": {
+    "upstream": null,
+    "downstream": "aos-factory-new（只读 Protocol Artifact）",
+    "output": "Protocol Contracts + Constitution + Registry",
+    "publish_target": "GitHub: aise-standard"
+  },
+  "forbidden": {
+    "modify": ["Constitution (frozen)", "Foundation Freeze (frozen)"],
+    "execute": ["Build", "Sign", "Install", "Runtime"]
+  }
+}

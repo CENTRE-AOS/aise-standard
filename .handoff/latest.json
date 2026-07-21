@@ -1,0 +1,13 @@
+{
+  "authority": "aise-standard",
+  "operation": "Foundation Integrity Fix",
+  "date": "2026-07-21",
+  "branch": "fix/foundation-integrity-20260721",
+  "commit": "300d358",
+  "files": [
+    "registry/version.json",
+    "registry/skills.json",
+    ".project/centre.protocol.json"
+  ],
+  "next": "RFC-0003 Production Chain v1.1"
+}

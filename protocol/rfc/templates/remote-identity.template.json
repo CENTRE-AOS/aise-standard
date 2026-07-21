@@ -1,0 +1,27 @@
+{
+  "repository": "github.com/<org>/aos-runtime",
+  "authority": "runtime",
+  "authority_level": "A1",
+  "release_source": "github-release",
+  "allowed_consumer": ["aos-factory"],
+  "bootstrap_contract": {
+    "required_files": ["AGENTS.md", "AGENT_CONTEXT.md"],
+    "version": "1.0.0"
+  },
+  "supply_chain": {
+    "upstream": {
+      "protocol": {
+        "repository": "aise-standard",
+        "version": "2.0.0-frozen",
+        "source": "github-release"
+      }
+    },
+    "downstream": {
+      "factory": {
+        "repository": "aos-factory",
+        "consumes": "runtime-release",
+        "version": "3.2.0"
+      }
+    }
+  }
+}

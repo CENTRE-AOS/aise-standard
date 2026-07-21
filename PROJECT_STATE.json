@@ -1,0 +1,59 @@
+{
+  "project": "aise-standard",
+  "project_id": "aise-standard",
+  "type": "protocol-authority",
+  "architecture": "v2.0",
+  "frozen": true,
+  "current_goal": "CENTRE Protocol Authority v2.0.0-frozen — 定义 Protocol 规则、Schema、合约和治理框架",
+  "version": {
+    "project": "2.0.0-frozen",
+    "protocol": "2.0.0-frozen",
+    "foundation": "v3.2.0"
+  },
+  "governance": {
+    "provider": "aise-standard",
+    "protocol": "CENTRE Protocol v2.0.0-frozen"
+  },
+  "capabilities": [
+    "protocol-definition",
+    "contract-definition",
+    "schema-definition",
+    "registry-management",
+    "template-provision",
+    "bootstrap-contract-definition",
+    "context-authority-model"
+  ],
+  "bootstrap": {
+    "model": "dual-layer",
+    "layer1": "AGENTS.md (Universal Agent Instruction)",
+    "layer2": "AGENT_CONTEXT.md (CENTRE Identity Contract)",
+    "authority_model": "protocol/governance/context-authority-model.md"
+  },
+  "authority": {
+    "owns": [
+      "protocol-definition",
+      "constitution",
+      "contracts",
+      "schemas",
+      "registry",
+      "templates"
+    ],
+    "does_not_own": [
+      "protocol-execution",
+      "artifact-build",
+      "deployment",
+      "agent-lifecycle",
+      "project-context"
+    ]
+  },
+  "boundary": {
+    "consumed_by": ["aos-runtime", "aos-factory-new", "aos-installer"],
+    "depends_on": [],
+    "identity": "CENTRE Protocol 2.0.0-frozen"
+  },
+  "lifecycle": {
+    "last_archive": null,
+    "last_freeze": "2026-07-20 (CENTRE Foundation Freeze v3.2.0)",
+    "last_release": "2026-07-20"
+  }
+}

@@ -1,0 +1,240 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aise-standard.org/schema/artifact-manifest/v1.0",
+  "title": "CENTRE Artifact Manifest Schema",
+  "description": "CENTRE Protocol v2.0.0-frozen Artifact Manifest Schema。定义 artifact.manifest.json 的完整结构、必填字段、版本模型和生命周期状态。",
+  "version": "1.0.0",
+  "frozen": true,
+  "type": "object",
+  "required": ["artifact", "version_model", "compatibility", "bootstrap_contract", "immutable"],
+  "additionalProperties": false,
+  "properties": {
+    "artifact": {
+      "type": "object",
+      "description": "Artifact 身份信息",
+      "required": [
+        "artifact_id",
+        "artifact_version",
+        "artifact_type",
+        "artifact_state",
+        "origin",
+        "authority",
+        "checksum"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "artifact_id": {
+          "type": "string",
+          "description": "Artifact 唯一标识，如 'aos-runtime', 'aise-standard', 'aos-cli'",
+          "minLength": 1
+        },
+        "artifact_version": {
+          "type": "string",
+          "description": "Artifact 版本号，遵循 MAJOR.MINOR.PATCH 格式",
+          "pattern": "^\\d+\\.\\d+\\.\\d+(-[a-zA-Z0-9.]+)?$"
+        },
+        "artifact_type": {
+          "type": "string",
+          "description": "Artifact 类型",
+          "enum": ["protocol", "runtime", "cli", "skill-bundle"]
+        },
+        "artifact_state": {
+          "type": "string",
+          "description": "Artifact 生命周期状态。只能向前转换，不可回退。",
+          "enum": ["candidate", "signed", "verified", "installed"],
+          "default": "candidate"
+        },
+        "build_time": {
+          "type": "string",
+          "description": "构建时间，ISO 8601 格式",
+          "format": "date-time"
+        },
+        "origin": {
+          "type": "object",
+          "description": "Artifact 来源信息",
+          "required": ["repository", "source_type", "commit"],
+          "additionalProperties": false,
+          "properties": {
+            "repository": {
+              "type": "string",
+              "description": "源仓库名称",
+              "minLength": 1
+            },
+            "source_type": {
+              "type": "string",
+              "description": "源类型",
+              "enum": ["runtime", "protocol", "cli", "skill-bundle"]
+            },
+            "commit": {
+              "type": "string",
+              "description": "构建源 commit SHA",
+              "pattern": "^[a-f0-9]{7,40}$"
+            }
+          }
+        },
+        "authority": {
+          "type": "object",
+          "description": "Artifact Authority 自描述",
+          "required": ["level", "issuer"],
+          "additionalProperties": false,
+          "properties": {
+            "level": {
+              "type": "string",
+              "description": "Authority 层级",
+              "enum": ["A0", "A1", "A2", "A3", "A4"]
+            },
+            "issuer": {
+              "type": "string",
+              "description": "签发者身份",
+              "minLength": 1
+            }
+          }
+        },
+        "checksum": {
+          "type": "object",
+          "description": "Artifact 完整性校验",
+          "required": ["algorithm", "hash"],
+          "additionalProperties": false,
+          "properties": {
+            "algorithm": {
+              "type": "string",
+              "description": "哈希算法",
+              "const": "sha256"
+            },
+            "hash": {
+              "type": "string",
+              "description": "SHA256 哈希值（hex 编码）",
+              "pattern": "^[a-f0-9]{64}$"
+            }
+          }
+        },
+        "signature": {
+          "type": "object",
+          "description": "Artifact 签名信息（A3 Artifact Authority 设置）",
+          "required": ["algorithm", "issuer", "value"],
+          "additionalProperties": false,
+          "properties": {
+            "algorithm": {
+              "type": "string",
+              "description": "签名算法",
+              "const": "rsa-sha256"
+            },
+            "issuer": {
+              "type": "string",
+              "description": "签名者身份",
+              "minLength": 1
+            },
+            "value": {
+              "type": "string",
+              "description": "签名值",
+              "minLength": 1
+            }
+          }
+        },
+        "path": {
+          "type": "string",
+          "description": "Artifact 文件路径"
+        },
+        "platform": {
+          "type": "string",
+          "description": "目标平台"
+        }
+      }
+    },
+    "version_model": {
+      "type": "object",
+      "description": "版本模型声明。四版本完全独立，不可绑定、不可合并、不可互相推导。",
+      "required": ["protocol_version", "runtime_version", "cli_version", "artifact_version", "independent"],
+      "additionalProperties": false,
+      "properties": {
+        "protocol_version": {
+          "type": "string",
+          "description": "协议规范版本（由 aise-standard 定义）",
+          "minLength": 1
+        },
+        "runtime_version": {
+          "type": "string",
+          "description": "Runtime 执行引擎版本（由 aos-runtime 定义）",
+          "minLength": 1
+        },
+        "cli_version": {
+          "type": "string",
+          "description": "CLI 工具版本（由 aos-installer 定义）",
+          "minLength": 1
+        },
+        "artifact_version": {
+          "type": "string",
+          "description": "本 Artifact 的发布版本（由 Build Authority 定义）",
+          "minLength": 1
+        },
+        "independent": {
+          "type": "boolean",
+          "description": "必须为 true，声明四版本独立",
+          "const": true
+        },
+        "note": {
+          "type": "string",
+          "description": "版本模型说明",
+          "default": "Protocol Version ≠ Runtime Version ≠ CLI Version ≠ Artifact Version"
+        }
+      }
+    },
+    "compatibility": {
+      "type": "object",
+      "description": "兼容性声明。由 Artifact Owner 声明，不是事实保证。",
+      "required": ["protocol_min", "protocol_max"],
+      "additionalProperties": false,
+      "properties": {
+        "protocol_min": {
+          "type": "string",
+          "description": "最低兼容 Protocol 版本",
+          "minLength": 1
+        },
+        "protocol_max": {
+          "type": "string",
+          "description": "最高兼容 Protocol 版本（不含）",
+          "minLength": 1
+        },
+        "runtime_min": {
+          "type": "string",
+          "description": "最低兼容 Runtime 版本",
+          "minLength": 1
+        },
+        "runtime_max": {
+          "type": "string",
+          "description": "最高兼容 Runtime 版本（不含）",
+          "minLength": 1
+        }
+      }
+    },
+    "bootstrap_contract": {
+      "type": "object",
+      "description": "Bootstrap Contract 声明。安装后 Runtime Instance 启动时必须满足。",
+      "required": ["required_files", "bootstrap_contract_version"],
+      "additionalProperties": false,
+      "properties": {
+        "required_files": {
+          "type": "array",
+          "description": "Bootstrap 必需文件列表",
+          "items": {
+            "type": "string",
+            "enum": ["AGENTS.md", "AGENT_CONTEXT.md"]
+          },
+          "minItems": 2,
+          "maxItems": 2,
+          "uniqueItems": true
+        },
+        "bootstrap_contract_version": {
+          "type": "string",
+          "description": "Bootstrap Contract 版本",
+          "minLength": 1
+        }
+      }
+    },
+    "immutable": {
+      "type": "boolean",
+      "description": "必须为 true。Artifact 一旦签名发布，永不修改。",
+      "const": true
+    }
+  }
+}

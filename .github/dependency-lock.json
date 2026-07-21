@@ -1,0 +1,16 @@
+{
+  "repository": "aise-standard",
+  "authority": "A0",
+  "lifecycle": "production",
+  "provides": "protocol-contracts",
+  "version": "2.0.0-frozen",
+  "downstream": {
+    "aos-factory": {
+      "consumes": "protocol-release",
+      "version_required": "2.0.0-frozen",
+      "source": "github-release"
+    }
+  },
+  "forbidden_consumers": [],
+  "notes": "Protocol Authority 是治理标准的唯一定义者。所有下游必须通过 Release Plane 消费，不得直接读取 Source Plane。"
+}
