@@ -10,7 +10,7 @@
 ## 1. Ownership Model
 
 ```
-CENTRE Architecture Governor (Root Agent)
+CENTRE Architecture Governor
         │
         │ owns: Protocol Integrity, Cross-Repo Architecture
         │
