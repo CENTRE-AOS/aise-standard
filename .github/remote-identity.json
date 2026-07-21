@@ -3,7 +3,7 @@
   "authority": "protocol",
   "authority_level": "A0",
   "lifecycle": "production",
-  "remote_status": "pending",
+  "remote_status": "active",
   "repository": {
     "name": "aise-standard",
     "name_frozen": "aise-standard",

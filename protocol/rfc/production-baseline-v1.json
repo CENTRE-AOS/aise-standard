@@ -1,0 +1,96 @@
+{
+  "baseline_id": "production-baseline-v1",
+  "baseline_date": "2026-07-21",
+  "phase": "S2-complete",
+  "phase_description": "Remote Binding & Source Synchronization — Local Source → Remote Authority trust established",
+  "namespace": "CENTRE-AOS",
+  "organization_url": "https://github.com/CENTRE-AOS",
+  "repositories": {
+    "aise-standard": {
+      "authority": "A0",
+      "authority_type": "Protocol Authority",
+      "commit": "a5dbacabaad1146e86263d39675fcd3d6f0dd177",
+      "version": "2.0.0-frozen",
+      "visibility": "public",
+      "branch": "main",
+      "remote": "git@github.com:CENTRE-AOS/aise-standard.git",
+      "url": "https://github.com/CENTRE-AOS/aise-standard"
+    },
+    "aos-runtime": {
+      "authority": "A1",
+      "authority_type": "Runtime Source Authority",
+      "commit": "d246657b8eba8a7bbaf745edb065aa200fdefd3c",
+      "version": "3.2.0",
+      "visibility": "public",
+      "branch": "main",
+      "remote": "git@github.com:CENTRE-AOS/aos-runtime.git",
+      "url": "https://github.com/CENTRE-AOS/aos-runtime"
+    },
+    "aos-factory": {
+      "authority": "A2",
+      "authority_type": "Build Authority",
+      "commit": "729143831be62c96ed27ee977b8fea4b3c79339a",
+      "version": "1.1.0",
+      "visibility": "private",
+      "branch": "main",
+      "remote": "git@github.com:CENTRE-AOS/aos-factory.git",
+      "url": "https://github.com/CENTRE-AOS/aos-factory",
+      "local_path": "aos-factory-new",
+      "local_note": "本地目录为迁移过渡名，GitHub 仓库使用最终名 aos-factory"
+    },
+    "aos-installer": {
+      "authority": "A4",
+      "authority_type": "Install Authority",
+      "commit": "eab16c39b4a6d312ddde3260697d7de1dd02188f",
+      "version": "1.1.0",
+      "visibility": "private",
+      "branch": "main",
+      "remote": "git@github.com:CENTRE-AOS/aos-installer.git",
+      "url": "https://github.com/CENTRE-AOS/aos-installer"
+    }
+  },
+  "reserved": {
+    "artifact-registry": {
+      "authority": "A3",
+      "authority_type": "Artifact Authority",
+      "status": "RESERVED — Phase 3"
+    }
+  },
+  "archive": {
+    "aos-migration": {
+      "authority": "Archive",
+      "status": "不在生产链中，单独归档"
+    }
+  },
+  "supply_chain_order": [
+    "A0 Protocol (aise-standard)",
+    "A1 Runtime Source (aos-runtime)",
+    "A2 Build (aos-factory)",
+    "A3 Artifact (RESERVED)",
+    "A4 Install (aos-installer)"
+  ],
+  "identity_freeze_chain": {
+    "S0": "Repository Identity Freeze",
+    "S0.5": "Repository Governance Freeze",
+    "S0.6": "Remote Ownership Freeze",
+    "S0.7": "Remote Identity Schema Freeze",
+    "S0.8": "Bootstrap Contract Freeze",
+    "S0.9": "Dependency Lock Freeze",
+    "S0.10": "Remote Naming & Ownership Freeze",
+    "S0.11": "Namespace Authority Freeze"
+  },
+  "production_authority_chain": {
+    "S1": "GitHub Repository Creation — Remote Authority Established",
+    "S2": "Remote Binding & Source Synchronization — Source Baseline Pushed"
+  },
+  "next_phase": "S3 Release Plane Bootstrap",
+  "governance_documents": [
+    "protocol/rfc/RFC-0003-production-chain.md",
+    "protocol/rfc/release-boundary-implementation-plan.md",
+    "protocol/rfc/authority-matrix.md",
+    "protocol/rfc/bootstrap-contract.md",
+    "protocol/rfc/naming-ownership-policy.md",
+    "protocol/rfc/dependency-lock.template.json",
+    "protocol/rfc/phase-2.8-upgrade-plan.md"
+  ]
+}
