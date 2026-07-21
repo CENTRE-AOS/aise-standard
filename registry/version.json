@@ -1,11 +1,16 @@
 {
-  "aise_standard": "2.5.0frozen",
-  "aise_protocol": "1.0",
+  "aise_standard": "2.0.0-frozen",
+  "aise_protocol": "2.0.0-frozen",
   "schema_version": "1",
   "released": "2026-07-16",
+  "updated": "2026-07-20",
   "status": "frozen",
-  "description": "AISE Protocol 1.0 Frozen — aise-standard v2.5.0frozen",
+  "description": "CENTRE Protocol 2.0.0-frozen — aise-standard v2.0.0-frozen",
   "governance": {
-    "provider": "agent-governance"
+    "provider": "aos-runtime"
+  },
+  "compatibility": {
+    "runtime_min": "3.2.0",
+    "foundation": "v3.2.0"
   }
 }

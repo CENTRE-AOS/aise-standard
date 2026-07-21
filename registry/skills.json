@@ -1,22 +1,57 @@
 {
-    "aise_version": "2.5.0frozen",
+    "aise_version": "2.0.0-frozen",
     "schema_version": "1",
+    "governance": {
+        "provider": "aos-runtime"
+    },
     "skills": {
         "aise-bootstrap": {
             "name": "AISE Bootstrap",
             "trigger": [],
-            "description": "AISE 全局入口约束：进入新项目或不确定上下文时优先执行，加载 Identity → Asset → Context → Governance",
+            "description": "CENTRE Bootstrap Entry Protocol：Agent 进入任意工作区时执行双层 Bootstrap（AGENTS.md → AGENT_CONTEXT.md → Identity → Asset → Context → Governance），建立 Authority Ranking 和 Context Boundary",
             "location": "Skills/aise-bootstrap/SKILL.md",
             "status": "frozen",
-            "version": "2.5.0frozen"
+            "version": "3.2.0"
+        },
+        "aise-admission": {
+            "name": "AISE Admission",
+            "trigger": [],
+            "description": "CENTRE Admission Control：Agent 进入 CENTRE 治理项目时，执行 Protocol Manifest 7 步验证链 + Bootstrap Context 验证",
+            "location": "Skills/aise-admission/SKILL.md",
+            "status": "frozen",
+            "version": "3.2.0"
         },
         "aise-inject": {
             "name": "AISE Inject",
             "trigger": ["注入aise", "初始化aise", "补全aise"],
-            "description": "给已有 Git 项目注入 AISE Protocol 治理体系：创建 Protocol Manifest、.project/ 资产、入口文件、Git Hooks",
+            "description": "给已有 Git 项目注入 CENTRE Protocol 治理体系：创建 Protocol Manifest、.project/ 资产、AGENTS.md、AGENT_CONTEXT.md、Git Hooks",
             "location": "Skills/aise-inject/SKILL.md",
             "status": "frozen",
-            "version": "2.5.0frozen"
+            "version": "3.2.0"
+        },
+        "aise-freeze": {
+            "name": "AISE Freeze",
+            "trigger": ["freeze", "冻结", "发布冻结"],
+            "description": "CENTRE Freeze：重大里程碑冻结协议。在 Foundation Freeze、Contract Freeze、Release Candidate Freeze、API Boundary Freeze 时执行",
+            "location": "Skills/aise-freeze/SKILL.md",
+            "status": "frozen",
+            "version": "3.2.0"
+        },
+        "aise-health": {
+            "name": "AISE Health Check",
+            "trigger": ["health", "check", "检查"],
+            "description": "CENTRE Health Check：检查 CENTRE_HOME 环境、Protocol 版本、Kernel 组件、Governance Loop、Registry、System Skills、Adapters、Bootstrap Contract 状态",
+            "location": "Skills/aise-health/SKILL.md",
+            "status": "frozen",
+            "version": "3.2.0"
+        },
+        "aise-update": {
+            "name": "AISE Update",
+            "trigger": ["update", "升级", "更新runtime"],
+            "description": "CENTRE Update：更新 CENTRE Runtime 到最新版本。含 Self-Modification Guard（5 步 Authority Check Chain）",
+            "location": "Skills/aise-update/SKILL.md",
+            "status": "frozen",
+            "version": "3.2.0"
         },
         "archive": {
             "name": "Archive",
@@ -24,31 +59,31 @@
             "description": "Git 存档工作流：变更分析→蓝图/日志更新→打标签→提交",
             "location": "Skills/archive/SKILL.md",
             "status": "frozen",
-            "version": "2.5.0frozen"
+            "version": "3.2.0"
         },
         "handoff": {
             "name": "Handoff",
             "trigger": ["移交", "接替"],
-            "description": "Agent 交接工作流：移交生成 HANDOFF.md；接替分析交接文档",
+            "description": "Agent 交接工作流：移交生成 HANDOFF.md（含 Bootstrap State + Authority Level）；接替分析交接文档并还原上下文",
             "location": "Skills/handoff/SKILL.md",
             "status": "frozen",
-            "version": "2.5.0frozen"
+            "version": "3.2.0"
         },
         "gitops": {
             "name": "GitOps",
             "trigger": ["新建项目"],
-            "description": "Git 初始化 + 项目骨架生成 + AISE 注入 + Git Hooks 安装",
+            "description": "Git 初始化 + 项目骨架生成 + CENTRE Protocol 注入 + AGENTS.md + AGENT_CONTEXT.md + Git Hooks 安装",
             "location": "Skills/gitops/SKILL.md",
             "status": "frozen",
-            "version": "2.5.0frozen"
+            "version": "3.2.0"
         },
         "review": {
             "name": "Review",
             "trigger": ["审查", "review", "检查"],
-            "description": "代码/架构/文档一致性检查，生成 Review Report",
+            "description": "代码/架构/文档一致性检查，含 AGENTS.md/AGENT_CONTEXT.md/Authority Model 审查，生成 Review Report",
             "location": "Skills/review/SKILL.md",
             "status": "frozen",
-            "version": "2.5.0frozen"
+            "version": "3.2.0"
         },
         "publish": {
             "name": "Publish",
@@ -56,7 +91,7 @@
             "description": "构建产物 → 验证 → 生成 Release Notes → 更新 Manifest",
             "location": "Skills/publish/SKILL.md",
             "status": "frozen",
-            "version": "2.5.0frozen"
+            "version": "3.2.0"
         },
         "sync": {
             "name": "Sync",
@@ -64,7 +99,7 @@
             "description": "工作环境安全升级到指定版本，保留用户数据和配置",
             "location": "Skills/sync/SKILL.md",
             "status": "frozen",
-            "version": "2.5.0frozen"
+            "version": "3.2.0"
         },
         "fetch": {
             "name": "Fetch",
@@ -72,15 +107,15 @@
             "description": "从 GitHub 拉取最新版本，比较差异，可选合并",
             "location": "Skills/fetch/SKILL.md",
             "status": "frozen",
-            "version": "2.5.0frozen"
+            "version": "3.2.0"
         },
         "verify": {
             "name": "Verify",
             "trigger": ["验证", "verify", "检查合规"],
-            "description": "AISE 合规验证：V0-V10 完整检查，输出 Compliance Report",
+            "description": "CENTRE Protocol 合规验证：V0-V10 完整检查（含 Bootstrap Contract 验证），输出 Compliance Report",
             "location": "Skills/verify/SKILL.md",
             "status": "frozen",
-            "version": "2.5.0frozen"
+            "version": "3.2.0"
         }
     }
 }
