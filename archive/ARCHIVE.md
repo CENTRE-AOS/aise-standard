@@ -22,6 +22,8 @@
 | `CAPABILITY-IMPACT-AUDIT-REPORT.md` | Phase 12 audit (aos-runtime, imported copy) |
 | `CAPABILITY-IMPACT-AUDIT-FINAL.md` | Phase 12 audit final (aos-runtime, imported copy) |
 | `P12-B5-RUNTIME-BOUNDARY-VERIFICATION.md` | Phase 12 boundary verification (aos-runtime only) |
+| `founder-archive/foundation-freeze-v3.4/CENTRE-FEDERATION-SYNC-v1.0.0.md` | Foundation Freeze v3.4 sync record (founder personal archive copy) |
+| `founder-archive/foundation-freeze-v3.4/CENTRE-ARCHITECTURE-OBSERVATION-LOG.md` | Architecture Observation Log v1.0.0 (founder personal archive copy) |
 
 ## Active Documents (NOT archived)
 
