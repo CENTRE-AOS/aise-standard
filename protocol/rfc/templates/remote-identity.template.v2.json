@@ -1,0 +1,24 @@
+{
+  "_schema": "CENTRE-FEDERATION remote-identity v2.0",
+  "_note": "PROPOSED v2.0. Current production: v1.x. See RFC-0012 §6.",
+  "_principle": "Identity ≠ State. Do NOT add runtime state, memory, or capability list to this file.",
+
+  "identity": {
+    "federation_id": "<org>.<authority_level>.<role_slug>",
+    "entity_type": "repository",
+    "owner": "<github-org>",
+    "origin": "aise-standard",
+    "trust_level": "production"
+  },
+
+  "binding": {
+    "protocol_version": "2.0.0-frozen",
+    "runtime_requirement": ">=3.2.0"
+  },
+
+  "certificate": {
+    "status": "active",
+    "issued_at": "2026-07-21",
+    "issuer": "CENTRE-FEDERATION v1.0.0"
+  }
+}

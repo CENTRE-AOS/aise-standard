@@ -1,11 +1,12 @@
-# CENTRE Foundation v3 — Architecture Baseline Freeze
+# CENTRE Foundation v3.4 — Architecture Baseline Freeze
 
-> 版本: 3.0.0
-> 日期: 2026-07-18
+> 版本: 3.4.0
+> 日期: 2026-07-21
 > 状态: Frozen
-> 范围: AOS Production Architecture (RFC-0007.2)
-> 上游: AISE Standard v3.1.0
+> 范围: AOS Production Architecture (RFC-0007.2) + Federation Layer (RFC-0012) + Runtime Boundary Enforcement (RFC-0013)
+> 上游: AISE Standard v3.1.0, CENTRE-FEDERATION v1.0.0
 > 下游: CENTRE Kernel v3.1.0, Capability Service Plane v0.1.0
+> 变更: v3.3 → v3.4 — Runtime Boundary Enforcement 正式冻结，进入 Runtime Phase
 
 ---
 
@@ -97,10 +98,10 @@ Concept Layer (defined, NOT implemented in Kernel):
   Agent     — 执行任务的智能体
   Context   — 结构化项目状态
   Memory    — 跨会话的智能体记忆
-  Federation — 跨 Runtime 的生态联合
+  Federation — 跨 Runtime 的生态联合 → **已冻结为 CENTRE-FEDERATION v1.0.0 (RFC-0012)**
 ```
 
-**目的：** 保证未来方向一致。概念层的 Schema 在 RFC-0002 的 Extension 部分定义，但不在 Kernel 中实现。
+**目的：** 保证未来方向一致。概念层的 Schema 在 RFC-0002 的 Extension 部分定义，但不在 Kernel 中实现。Federation 已从概念层升级为 Protocol 子领域，定义在 `protocol/federation/`。
 
 ---
 
@@ -332,6 +333,130 @@ AOS = Skill Framework（Skill 作为 AOS 核心）
 ### 2.11.4 原因
 
 Skill 是 Governance Context 注入的执行层面，不是 AOS 的架构基础。
+
+---
+
+## 2.12 Principle #8 — Federation Layer（RFC-0012 新增，Freeze v3.3）
+
+### 2.12.1 冻结
+
+CENTRE 架构引入 Federation Layer，位于 Protocol 和 Runtime 之间。
+
+```
+                    CENTRE
+
+              Protocol Constitution
+                      │         "什么规则？"
+                      ▼
+              Federation Layer          ← v3.3 新增
+          Identity / Admission / Certificate
+                      │         "这个仓库是谁？"
+                      ▼
+              Gateway Runtime           "怎么执行？"
+                      │
+                      ▼
+              Project Runtime
+     Context / Memory / State / Artifact
+                      │
+                      ▼
+                 Agent Runtime
+          Skill / Task / Intelligence Loop
+```
+
+### 2.12.2 原则
+
+> Federation = Protocol, not Runtime.
+> Federation 是 Protocol Layer 的子领域，不是 Runtime 模块。
+
+### 2.12.3 核心规则
+
+```
+Identity Manifest > Folder Name > Git Remote Name
+```
+
+Agent 必须以 Manifest 内容为准，不得以目录名推测 Authority 身份。
+
+### 2.12.4 禁止
+
+```
+Federation Manager / Federation Server / Federation Database
+CENTRE 拥有生态资产
+Runtime 判断仓库身份
+```
+
+### 2.12.5 冻结项（v3.3）
+
+| # | 冻结项 | 定义位置 |
+|---|--------|---------|
+| 1 | Federation Contract | `protocol/federation/admission-protocol.md` |
+| 2 | Identity Resolution Algorithm | `protocol/federation/identity-resolution.md` |
+| 3 | Certificate Format | `protocol/federation/federation-certificate.md` |
+| 4 | Versioning Rule | Principle #8 + RFC-0012 |
+
+### 2.12.6 原因
+
+Protocol 定义了"什么规则"，Runtime 定义了"怎么执行"。但缺少一个中间层回答"这个仓库是谁？"。Federation Layer 填补了 Identity Boundary 空白，使 CENTRE 从三层模型进化为五层模型。
+
+---
+
+## 2.13 Principle #9 — Runtime Boundary Enforcement（RFC-0013 新增，Freeze v3.4）
+
+### 2.13.1 冻结
+
+Runtime 的 Authority 边界通过三层权限模型定义：
+
+```
+CAN        — Runtime 有能力执行
+ALLOWED    — Protocol 授权 Runtime 执行
+FORBIDDEN  — Protocol 明确禁止 Runtime 执行
+```
+
+### 2.13.2 ALLOWED
+
+Runtime 可以：
+- Execute Protocol（执行协议规则）
+- Manage Lifecycle（管理自身和 Project 生命周期）
+- Invoke Capability（调用扩展能力）
+- Emit Events（产生事件）
+- Validate Contract（验证合约合规性）
+- Route Events（路由事件）
+- Enforce Contract（强制执行合约）
+
+### 2.13.3 FORBIDDEN
+
+Runtime 不能：
+- Modify Protocol Authority（修改协议权威）
+- Redefine Identity（重新定义身份）
+- Own Federation State（拥有 Federation 状态）
+- Become Ecosystem Registry（成为生态注册中心）
+- Own Project State（拥有项目状态）
+- Define Protocol Rules（定义协议规则）
+- Manage Agent Behavior（管理 Agent 行为）
+
+### 2.13.4 State Ownership
+
+| State 类型 | Owner | Runtime Access |
+|-----------|-------|:-------------:|
+| Protocol Definition | Protocol Authority (A0) | Read-Only |
+| Federation Contract | Protocol Authority (A0) | Read-Only |
+| Runtime Execution State | Runtime (A1) | Read-Write |
+| Project State | Project | Read (via Context API) |
+| Agent Memory | Agent / Project | Read (via Context API) |
+| Artifact | Factory (A2) | Read-Only |
+| Certificate | Federation | Read-Only |
+
+### 2.13.5 核心原则
+
+```
+Runtime owns execution state, NOT business state.
+Runtime executes protocol, NOT owns protocol.
+Runtime validates identity, NOT defines identity.
+Runtime routes events, NOT owns events.
+```
+
+### 2.13.6 原因
+
+从 Protocol Contract 到 Runtime Enforcement 的链路必须完整。Foundation 不仅定义规则，还必须定义 Runtime 执行规则的精确边界。这是 CENTRE 从"设计协议"进入"计算系统"的关键节点。
 
 ---
 
@@ -812,7 +937,7 @@ Extension Packages（可扩展，不内嵌）
 | Context Graph | RFC-0002 §5 Extension | v0.2+ |
 | Event Routing | RFC-0002 §4 Extension | v0.2+ |
 | State Synchronization | 延迟到独立 RFC | v0.2+ |
-| Federation | 概念层保留 | 未来 |
+| Federation | 概念层保留 → **已冻结** | CENTRE-FEDERATION v1.0.0 (RFC-0012) |
 
 ### 14.3 明确禁止（Explicitly Forbidden）❌
 
@@ -887,6 +1012,8 @@ agent-governance 不是 "CENTRE Runtime 已完成"，而是：
 | RFC-0006 | Kernel Framework | Frozen |
 | RFC-0007.2 | Production Architecture v3.0 | Frozen |
 | RFC-0008 | Evolution Protocol | Future |
+| RFC-0012 | Federation Layer Introduction | Frozen |
+| RFC-0013 | Runtime Boundary Enforcement | Frozen |
 
 ---
 
@@ -897,6 +1024,8 @@ AISE Standard
         |
         ▼
 CENTRE Protocol
+        |
+        ├── Federation Layer (v3.3 NEW)
         |
         ▼
 CENTRE Kernel
@@ -930,6 +1059,7 @@ External Capability
 |------|------|
 | **AISE Standard** | 定义秩序 |
 | **CENTRE Protocol** | 定义契约 |
+| **CENTRE Federation** | 身份解析与准入 (v3.3 NEW) |
 | **CENTRE Kernel** | 执行秩序 |
 | **Contract System** | 描述环境关系 |
 | **Agent Binding Protocol** | 建立 Agent 连接 |
